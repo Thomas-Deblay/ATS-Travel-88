@@ -507,7 +507,9 @@ $(function(){
 
 				/* tracking of virtual page view on payment page begin
 				*/
-
+				gtag('event', 'page_view', {
+					page_location: 'https://ats-xx.xxlabs.com/ATStravel-GA4-gtag/payment.html'
+				  });
 				// tracking of virtual page view on payment page end
 				history.pushState({}, 'Payment | ATS Travel Website', 'payment.html');
 				var cart55 = getCookie('55Basket') ? JSON.parse(getCookie('55Basket')) : [];

@@ -1,8 +1,6 @@
 /* tracking of Page begin
 */
-gtag('event', 'page_view', {
-	page_title: 'Homepage',
-  });
+gtag('event', 'page_view');
 // tracking of Page end
 
 var usersList =[
