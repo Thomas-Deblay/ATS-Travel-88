@@ -13,44 +13,44 @@ console.log("match[0]", match[0])
 
 switch (match[0]) {
 	case 'index.html':
-		gtag('set', {
+		gtag('event', 'page_view', {
 			'page_type': 'Home',
 		  });
 		break;
 	case "destinations.html" : 
-		gtag('set', {
+		gtag('event', 'page_view', {
 		'page_type': 'All travels list',
 	  });
 	break;
 	case "details.html" : 
-		gtag('set', {
+		gtag('event', 'page_view', {
 		'page_type': 'Travel page',
 	  });
 	break;
 	case "login.html" :
-		gtag('set', {
+		gtag('event', 'page_view', {
 			'page_type': 'User connection',
 		  });
 	break;
 	case "basket.html" : 
-		gtag('set', {
+		gtag('event', 'page_view', {
 		'page_type': 'Cart',
 	  });
 	break;
 	case "checkout.html" : 
-		gtag('set', {
+		gtag('event', 'page_view', {
 		'page_type': 'Checkout',
 	  });
 	break;
 	case "thankyou.html" :
-		gtag('set', {
+		gtag('event', 'page_view', {
 			'page_type': 'Confirmation',
 		  });
 	break;
 
 }
 
-gtag('event', 'page_view');
+
 // tracking of Page end
 
 var usersList =[
