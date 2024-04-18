@@ -1,6 +1,6 @@
 /* tracking of Page begin
 */
-gtag('event', 'page_view');
+
 
 //Exercice 3
 const path = document.location.pathname;
@@ -49,6 +49,8 @@ switch (match[0]) {
 	break;
 
 }
+
+gtag('event', 'page_view');
 // tracking of Page end
 
 var usersList =[
