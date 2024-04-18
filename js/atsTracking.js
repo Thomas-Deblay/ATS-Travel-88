@@ -1,6 +1,12 @@
 /* tracking of Page begin
 */
 gtag('event', 'page_view');
+
+//Exercice 3
+const home = 'index.html';
+console.log("DOCUMENT.LOCATION",document.location)
+console.log("DOCUMENT.LOCATION.href",document.location.href)
+console.log("TESTING THE MATCH",home.match(document.location.href))
 // tracking of Page end
 
 var usersList =[
