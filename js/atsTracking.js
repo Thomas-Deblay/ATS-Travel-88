@@ -42,7 +42,7 @@ gtag('config', 'G-LBRTL3HFG0', {
 	page_type: pageType,
   });
 
-
+gtag('event', 'page_view');
 
 
 // tracking of Page end
