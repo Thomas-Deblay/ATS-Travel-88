@@ -4,11 +4,48 @@ gtag('event', 'page_view');
 
 //Exercice 3
 const path = document.location.pathname;
-const regexHome = /index\.html$/;
-console.log("Pathname === ",document.location.pathname)
-console.log("RegExp.prototype.test()", regexHome.test(path))
-console.log("String.prototype.match(RegEx)", path.match(regexHome))
-console.log("Page tested: INDEX.HTML")
+const regex = /[^\/]+\.html$/;
+const match = path.match(regex);
+
+
+switch (match[0]) {
+	case 'index.html':
+		gtag('set', {
+			'page_type': 'Home',
+		  });
+		break;
+	case "destinations.html" : 
+		gtag('set', {
+		'page_type': 'All travels list',
+	  });
+	break;
+	case "details.html" : 
+		gtag('set', {
+		'page_type': 'Travel page',
+	  });
+	break;
+	case "login.html" :
+		gtag('set', {
+			'page_type': 'User connection',
+		  });
+	break;
+	case "basket.html" : 
+		gtag('set', {
+		'page_type': 'Cart',
+	  });
+	break;
+	case "checkout.html" : 
+		gtag('set', {
+		'page_type': 'Checkout',
+	  });
+	break;
+	case "thankyou.html" :
+		gtag('set', {
+			'page_type': 'Confirmation',
+		  });
+	break;
+
+}
 // tracking of Page end
 
 var usersList =[
