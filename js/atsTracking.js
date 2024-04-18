@@ -1,6 +1,7 @@
 /* tracking of Page begin
 */
 
+console.log("EXERCICE 1")
 
 //Exercice 3
 const path = document.location.pathname;
