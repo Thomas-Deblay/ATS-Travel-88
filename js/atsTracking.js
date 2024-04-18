@@ -3,10 +3,12 @@
 gtag('event', 'page_view');
 
 //Exercice 3
-const home = 'index.html';
-console.log("DOCUMENT.LOCATION",document.location)
-console.log("DOCUMENT.LOCATION.href",document.location.href)
-console.log("TESTING THE MATCH",home.match(document.location.href))
+const path = document.location.pathname;
+const regexHome = /index\.html$/;
+console.log("Pathname === ",document.location.pathname)
+console.log("RegExp.prototype.test()", regexHome.test(path))
+console.log("String.prototype.match(RegEx)", path.match(regexHome))
+console.log("Page tested: INDEX.HTML")
 // tracking of Page end
 
 var usersList =[
