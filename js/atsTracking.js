@@ -6,6 +6,7 @@
 const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
+var pageType; 
 
 console.log("match", match)
 console.log("match[0]", match[0])
@@ -13,42 +14,35 @@ console.log("match[0]", match[0])
 
 switch (match[0]) {
 	case 'index.html':
-		gtag('event', 'page_view', {
-			'page_type': 'Home',
-		  });
+		pageType = 'Home';
 		break;
 	case "destinations.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'All travels list',
-	  });
-	break;
+		pageType = 'All travels list';
+		break;
 	case "details.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Travel page',
-	  });
-	break;
+		pageType = 'Travel page';
+		break;
 	case "login.html" :
-		gtag('event', 'page_view', {
-			'page_type': 'User connection',
-		  });
-	break;
+		pageType = 'User connection';
+		break;
 	case "basket.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Cart',
-	  });
-	break;
+		pageType = 'Cart';
+		break;
 	case "checkout.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Checkout',
-	  });
+		pageType =  'Checkout';
 	break;
 	case "thankyou.html" :
-		gtag('event', 'page_view', {
-			'page_type': 'Confirmation',
-		  });
-	break;
+		pagetype = 'Confirmation';
+		break;
 
 }
+
+gtag('config', 'G-LBRTL3HFG0', {
+	send_page_view: false,
+	page_type: pageType,
+  });
+
+
 
 
 // tracking of Page end
