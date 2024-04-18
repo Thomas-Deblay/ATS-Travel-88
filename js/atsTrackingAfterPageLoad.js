@@ -116,7 +116,7 @@ $(function(){
 		$("#viewDestination a").on('click',function(e){
 			/* tracking of View Destinations button click begin
 			*/
-
+			gtag('event', 'click', {'page_type': 'home', 'click_label': 'view destinations'})
 			// tracking of View Destinations button click end
 		});
 		
