@@ -7,6 +7,9 @@ const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
 
+console.log("match", match)
+console/log("match[0]", match[0])
+
 
 switch (match[0]) {
 	case 'index.html':
