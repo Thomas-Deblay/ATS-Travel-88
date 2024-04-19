@@ -43,16 +43,16 @@ switch (match[0]) {
 
 
 
-
-
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('config', 'G-LBRTL3HFG0', {
+gtag('config', 'G-LBRTL3HFG0', {
 	send_page_view: false,
 	page_type: pageType,
-	customer_id: clientIDGet,
-  }) ) 
+  });
+
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('set', {customer_id : clientIDGet} ) )
 
 
-gtag('event', 'page_view');
+
+gtag('event', 'page_view', {customer_id : customer_id});
 
 
 
