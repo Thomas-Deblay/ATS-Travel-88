@@ -48,14 +48,14 @@ gtag('config', 'G-LBRTL3HFG0', {
 	page_type: pageType,
   });
 
-var clientID;
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => clientID = clientIDGet  )
-console.log( clientID )
-gtag('set', {customer_id : clientID} )
+
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('event', 'page_view', {customer_id : clientIDGet}) )
 
 
 
-gtag('event', 'page_view');
+
+
+
 
 
 
