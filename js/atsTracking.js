@@ -1,6 +1,8 @@
 /* tracking of Page begin
 */
-
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
 //Exercice 3
 const path = document.location.pathname;
