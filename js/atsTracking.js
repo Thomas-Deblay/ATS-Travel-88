@@ -9,7 +9,7 @@ const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
 var pageType; 
-var clientID;
+
 
 console.log("match", match)
 console.log("match[0]", match[0])
@@ -48,9 +48,7 @@ gtag('config', 'G-LBRTL3HFG0', {
 	page_type: pageType,
   });
 
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => clientID = clientIDGet )
-console.log('DO I HAVE IT',clientID)
-gtag('set', {customer_id : clientID} )
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('set', {customer_id: clientIDGet} ) )
 
 gtag('event', 'page_view');
 
