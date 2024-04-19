@@ -96,16 +96,25 @@ $(function(){
 		* use promotions JS variable to get promotions details
 		*/
 
-		gtag('event', 'view_promotion')
-		promotions.forEach((promo,index) =>{
-			const keyProm = `pr${index+1}`;
+		// It is ask to put inside an array, but is not a necessary step
+		let arrayOfParams = []
+		promotions.forEach((promo) =>{
 			const valProm =  `cn${promo.creative_name}~cs${promo.creative_slot}~pi${promo.promotion_id}~pn${promo.item_name}`;
-			 console.log(keyProm)
-			 console.log(valProm)
-			 gtag('set', 'view_promotion', {keyProm : valProm})
+			 arrayOfParams = [...arrayOfParams, valProm]
 			} )
+	
 
-			
+			const eventParams = {};
+			arrayOfParams.forEach((PromoParams, index) => {
+				
+				eventParams['pr' + (index + 1)] = PromoParams;
+			})
+			console.log(eventParams)
+		gtag('event', 'view_promotion', eventParams)
+
+
+		console.log(arrayOfParams)
+		console.log(promotions)
 		
 
 		// tracking of Ecommerce promotion views action end
