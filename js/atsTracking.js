@@ -43,13 +43,14 @@ switch (match[0]) {
 
 
 
-gtag('config', 'G-LBRTL3HFG0', {
+
+
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('config', 'G-LBRTL3HFG0', {
 	send_page_view: false,
 	page_type: pageType,
-  });
+	customer_id: clientIDGet,
+  }) ) 
 
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('set', {customer_id: clientIDGet} ) )
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => console.log(clientIDGet + 'WE ARE GETTING A' + typeof clientIDGet) )
 
 gtag('event', 'page_view');
 
