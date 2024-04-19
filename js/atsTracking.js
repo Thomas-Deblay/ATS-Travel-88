@@ -52,7 +52,7 @@ gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('set', {customer_
 
 
 
-gtag('event', 'page_view', {customer_id : customer_id});
+gtag('event', 'page_view', {customer_id : 'customer_id'});
 
 
 
