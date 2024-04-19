@@ -10,7 +10,7 @@ const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
 var pageType; 
 
-
+console.log('PATH', path)
 
 
 if (!match) {
