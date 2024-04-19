@@ -14,7 +14,11 @@ var pageType;
 console.log("match", match)
 console.log("match[0]", match[0])
 
-
+if (!match) {
+    if (path === '/') {
+        pageType = 'Home';  // Assuming the root path should be treated as 'Home'
+    } 
+} else {
 switch (match[0]) {
 	case 'index.html':
 		pageType = 'Home';
@@ -38,8 +42,8 @@ switch (match[0]) {
 		pagetype = 'Confirmation';
 		break;
 
+	}
 }
-
 
 
 
