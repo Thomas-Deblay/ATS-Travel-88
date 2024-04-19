@@ -11,12 +11,11 @@ const match = path.match(regex);
 var pageType; 
 
 
-console.log("match", match)
-console.log("match[0]", match[0])
+
 
 if (!match) {
     if (path === '/') {
-        pageType = 'Home';  // Assuming the root path should be treated as 'Home'
+        pageType = 'Home';  
     } 
 } else {
 switch (match[0]) {
