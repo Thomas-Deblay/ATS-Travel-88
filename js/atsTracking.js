@@ -48,6 +48,7 @@ switch (match[0]) {
 gtag('config', 'G-LBRTL3HFG0', {
 	send_page_view: false,
 	page_type: pageType,
+	'allow_ad_personalization_signals': false
   });
 
 
