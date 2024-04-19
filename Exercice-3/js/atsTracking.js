@@ -14,7 +14,7 @@ var pageType;
 
 
 if (!match) {
-    if (path === '/ATS-Travel-88/') { // This path is specific to my hosting set up and design the root / of the website
+    if (path === '/ATS-Travel-88/Exercice-3/') { // This path is specific to my hosting set up and design the root / of the website
         pageType = 'Home';  
     } 
 } else {
