@@ -1,7 +1,7 @@
 /* tracking of Page begin
 */
 
-console.log("EXERCICE 1")
+console.log("EXERCICE 2")
 
 //DataLayer init 
 window.dataLayer = window.dataLayer || [];

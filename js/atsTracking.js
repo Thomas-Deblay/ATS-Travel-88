@@ -46,6 +46,8 @@ gtag('config', 'G-LBRTL3HFG0', {
 
 gtag('event', 'page_view');
 
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (whatWeGet) => console.log(whatWeGet))
+
 
 // tracking of Page end
 
