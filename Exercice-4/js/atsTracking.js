@@ -1,55 +1,65 @@
 /* tracking of Page begin
 */
-
-console.log("EXERCICE 1")
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
 //Exercice 3
+console.log('EXERCICE 3')
 const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
-
-console.log("match", match)
-console.log("match[0]", match[0])
+var pageType; 
 
 
+
+if (!match) {
+    if (path === '/ATS-Travel-88/Exercice-3/') { // This path is specific to my hosting set up and design the root / of the website
+        pageType = 'Home';  
+    } 
+} else {
 switch (match[0]) {
 	case 'index.html':
-		gtag('event', 'page_view', {
-			'page_type': 'Home',
-		  });
+		pageType = 'Home';
 		break;
 	case "destinations.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'All travels list',
-	  });
-	break;
+		pageType = 'All travels list';
+		break;
 	case "details.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Travel page',
-	  });
-	break;
+		pageType = 'Travel page';
+		break;
 	case "login.html" :
-		gtag('event', 'page_view', {
-			'page_type': 'User connection',
-		  });
-	break;
+		pageType = 'User connection';
+		break;
 	case "basket.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Cart',
-	  });
-	break;
+		pageType = 'Cart';
+		break;
 	case "checkout.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Checkout',
-	  });
+		pageType =  'Checkout';
 	break;
 	case "thankyou.html" :
-		gtag('event', 'page_view', {
-			'page_type': 'Confirmation',
-		  });
-	break;
+		pagetype = 'Confirmation';
+		break;
 
+	}
 }
+
+
+
+gtag('config', 'G-LBRTL3HFG0', {
+	send_page_view: false,
+	page_type: pageType,
+  });
+
+
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('event', 'page_view', {customer_id : clientIDGet}) )
+
+
+
+
+
+
+
 
 
 // tracking of Page end

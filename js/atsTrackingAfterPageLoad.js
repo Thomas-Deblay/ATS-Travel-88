@@ -96,6 +96,18 @@ $(function(){
 		* use promotions JS variable to get promotions details
 		*/
 
+		gtag('event', 'view_promotion')
+		promotions.forEach((promo,index) =>{
+			const keyProm = `pr${index+1}`;
+			const valProm =  `cn${promo.creative_name}~cs${promo.creative_slot}~pi${promo.promotion_id}~pn${promo.item_name}`;
+			 console.log(keyProm)
+			 console.log(valProm)
+			 gtag('set', 'view_promotion', {keyProm : valProm})
+			} )
+
+			
+		
+
 		// tracking of Ecommerce promotion views action end
 
 		$(".carousel-inner a").on('click',function(e){
