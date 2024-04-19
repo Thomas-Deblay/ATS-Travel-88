@@ -39,6 +39,11 @@ switch (match[0]) {
 
 }
 
+var clientID;
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientWeGet) => clientID = clientWeGet )
+
+gtag('set', {customer_id : clientID} )
+
 gtag('config', 'G-LBRTL3HFG0', {
 	send_page_view: false,
 	page_type: pageType,
@@ -46,7 +51,6 @@ gtag('config', 'G-LBRTL3HFG0', {
 
 gtag('event', 'page_view');
 
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (whatWeGet) => gtag('set', {'customer_id' : whatWeGet.toString()} ))
 
 
 // tracking of Page end
