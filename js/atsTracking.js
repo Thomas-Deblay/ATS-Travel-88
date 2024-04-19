@@ -10,11 +10,10 @@ const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
 var pageType; 
 
-console.log('PATH', path)
 
 
 if (!match) {
-    if (path === '/') {
+    if (path === '/ATS-Travel-88/') { // This path is specific to my hosting set up and design the root / of the website
         pageType = 'Home';  
     } 
 } else {
