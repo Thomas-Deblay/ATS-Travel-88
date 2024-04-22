@@ -96,25 +96,58 @@ $(function(){
 		* use promotions JS variable to get promotions details
 		*/
 
-		// It is ask to put inside an array, but is not a necessary step
-		let arrayOfParams = []
+		// -- Doing it the right way with e-commerce gtag with the doc
+
+		console.log(promotions)
+		const itemList = []
 		promotions.forEach((promo) =>{
-			const valProm =  `cn${promo.creative_name}~cs${promo.creative_slot}~pi${promo.promotion_id}~pn${promo.item_name}`;
-			 arrayOfParams = [...arrayOfParams, valProm]
+			const itemConfigure = {
+				item_id: promo.item_id,
+				item_name: promo.item_name,
+				creative_name: promo.creative_name, 
+				creative_slot: promo.creative_slot.toString(),
+				index: promo.index,
+				item_category: promo.item_category,
+				item_variant: promo.item_variant,
+				location_id: promo.location_id.toString(),
+				price: Number(promo.price),
+				promotion_id: promo.promotion_id, 
+				promotion_name: promo.promotion_name,
+				quantity: Number(promo.quantity)
+				
+			}
+			 itemList = [...itemList, itemConfigure]
 			} )
+
+		console.log('Item List', itemList)
+
+		gtag("event", "view_item_list", {
+			item_list_id: "view_promotion",
+  			item_list_name: "View promotion",
+  			items: itemList
+		})
+
+
+		// ====== THIS WAS ALL ME GOING IN THE WRONG DIRECTION, TRYING TO HARD CODE IT ===========
+		// console.log(promotions)
+		// let arrayOfParams = []
+		// promotions.forEach((promo) =>{
+		// 	const valProm =  `cn${promo.creative_name}~cs${promo.creative_slot}~pi${promo.promotion_id}~pn${promo.item_name}`;
+		// 	 arrayOfParams = [...arrayOfParams, valProm]
+		// 	} )
 	
 
-			const eventParams = {};
-			arrayOfParams.forEach((PromoParams, index) => {
+		// 	const eventParams = {};
+		// 	arrayOfParams.forEach((PromoParams, index) => {
 				
-				eventParams['pr' + (index + 1)] = PromoParams;
-			})
-			console.log(eventParams)
-		gtag('event', 'view_promotion', eventParams)
+		// 		eventParams['pr' + (index + 1)] = PromoParams;
+		// 	})
+		// 	console.log(eventParams)
+		// gtag('event', 'view_promotion', eventParams)
 
 
-		console.log(arrayOfParams)
-		console.log(promotions)
+		// console.log(arrayOfParams)
+		// console.log(promotions)
 		
 
 		// tracking of Ecommerce promotion views action end
