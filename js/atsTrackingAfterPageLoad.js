@@ -99,7 +99,7 @@ $(function(){
 		// -- Doing it the right way with e-commerce gtag with the doc
 
 		console.log(promotions)
-		const itemList = []
+		let itemList = []
 		promotions.forEach((promo) =>{
 			const itemConfigure = {
 				item_id: promo.item_id,
