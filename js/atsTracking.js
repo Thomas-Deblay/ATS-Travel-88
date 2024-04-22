@@ -53,7 +53,7 @@ gtag('config', 'G-LBRTL3HFG0', {
   });
 
 
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('event', 'page_view', {customer_id : clientIDGet}) )
+gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('set', 'user_properties', {'customer_id' : clientIDGet}) )
 
 
 
@@ -127,7 +127,24 @@ if(/details\.html/.test(window.location.pathname)){
 	* use travelDestination JS variable to get travel details
 	* use listName JS variable to get the name of the list if needed
 	*/
+	console.log(travelDestination)
+	console.log(listName)
+	// console.log(document.querySelectorAll(select))
 
+	// gtag("event", "view_item", {
+	// 	currency: "USD",
+	// 	value: travelDestination.price * quantity ,
+	// 	items: [
+	// 	  {
+	// 		item_id: travelDestination.id,
+	// 		item_name: travelDestination.name,
+	// 		item_category: travelDestination.category,
+	// 		item_list_name: listName,
+	// 		price: travelDestination.price,
+	// 		quantity: 3,
+	// 	  }
+	// 	]
+	//   });
 	// tracking of Ecommerce detail action end
 }
 
