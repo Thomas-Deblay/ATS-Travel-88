@@ -121,9 +121,7 @@ $(function(){
 
 		console.log('Item List', itemList)
 
-		gtag("event", "view_item_list", {
-			item_list_id: "view_promotion",
-  			item_list_name: "View promotion",
+		gtag("event", "view_promotion", {
   			items: itemList
 		})
 
