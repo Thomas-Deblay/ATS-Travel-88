@@ -53,7 +53,13 @@ gtag('config', 'G-LBRTL3HFG0', {
   });
 
 
-gtag('get', 'G-LBRTL3HFG0', 'client_id', (clientIDGet) => gtag('set', 'user_properties', {'customer_id' : clientIDGet}) )
+gtag('get', 'G-LBRTL3HFG0', 'client_id', clientIDGet => {
+	gtag('set', 'user_properties', {'customer_id' : clientIDGet}); // User_properties = dimension relié a ton utilisateur
+	gtag("event", "page_view");
+}
+	
+);
+
 
 
 
@@ -131,20 +137,20 @@ if(/details\.html/.test(window.location.pathname)){
 	console.log(listName)
 	// console.log(document.querySelectorAll(select))
 
-	// gtag("event", "view_item", {
-	// 	currency: "USD",
-	// 	value: travelDestination.price * quantity ,
-	// 	items: [
-	// 	  {
-	// 		item_id: travelDestination.id,
-	// 		item_name: travelDestination.name,
-	// 		item_category: travelDestination.category,
-	// 		item_list_name: listName,
-	// 		price: travelDestination.price,
-	// 		quantity: 3,
-	// 	  }
-	// 	]
-	//   });
+	gtag("event", "view_item", {
+		currency: "USD",
+		value: travelDestination.price ,
+		items: [
+		  {
+			item_id: travelDestination.id,
+			item_name: travelDestination.name,
+			item_category: travelDestination.category,
+			item_list_name: listName,
+			price: travelDestination.price,
+			quantity: 1,
+		  }
+		]
+	  });
 	// tracking of Ecommerce detail action end
 }
 
