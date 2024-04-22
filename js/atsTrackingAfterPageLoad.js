@@ -158,7 +158,22 @@ $(function(){
 					/* tracking of Ecommerce promotion click action begin
                     * use promotions[v] JS variable to get promotions details
                     */
-
+					gtag("event", "select_promotion", {
+	
+						items: [{
+						item_id: promotions[v].item_id,
+				item_name: promotions[v].item_name,
+				creative_name: promotions[v].creative_name, 
+				creative_slot: promotions[v].creative_slot.toString(),
+				index: promotions[v].index,
+				item_category: promotions[v].item_category,
+				item_variant: promotions[v].item_variant,
+				location_id: promotions[v].location_id.toString(),
+				price: Number(promotions[v].price),
+				promotion_id: promotions[v].promotion_id, 
+				promotion_name: promotions[v].promotion_name,
+				quantity: Number(promotions[v].quantity)
+					}]})
 					// tracking of Ecommerce promotion click action end
 					break;
 				}
