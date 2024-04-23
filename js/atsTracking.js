@@ -174,6 +174,13 @@ if(/checkout\.html/.test(window.location.pathname)){
 		* use products JS variable to get basket products detail
 		*/
 
+		gtag("event", "view_cart", {
+			currency: "USD",
+			value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+			step: "1",
+			items: products
+		  });
+
 		// tracking of first checkout step action end
 	}
 	
