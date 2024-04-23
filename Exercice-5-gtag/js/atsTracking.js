@@ -1,55 +1,73 @@
 /* tracking of Page begin
 */
-
-console.log("EXERCICE 1")
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
 //Exercice 3
 const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
-
-console.log("match", match)
-console.log("match[0]", match[0])
+var pageType; 
 
 
+
+if (!match) {
+    if (path === '/ATS-Travel-88/') { // This path is specific to my hosting set up and design the root / of the website
+        pageType = 'Home';  
+    } 
+} else {
 switch (match[0]) {
 	case 'index.html':
-		gtag('event', 'page_view', {
-			'page_type': 'Home',
-		  });
+		pageType = 'Home';
 		break;
 	case "destinations.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'All travels list',
-	  });
-	break;
+		pageType = 'All travels list';
+		break;
 	case "details.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Travel page',
-	  });
-	break;
+		pageType = 'Travel page';
+		break;
 	case "login.html" :
-		gtag('event', 'page_view', {
-			'page_type': 'User connection',
-		  });
-	break;
+		pageType = 'User connection';
+		break;
 	case "basket.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Cart',
-	  });
-	break;
+		pageType = 'Cart';
+		break;
 	case "checkout.html" : 
-		gtag('event', 'page_view', {
-		'page_type': 'Checkout',
-	  });
+		pageType =  'Checkout';
 	break;
 	case "thankyou.html" :
-		gtag('event', 'page_view', {
-			'page_type': 'Confirmation',
-		  });
-	break;
+		pagetype = 'Confirmation';
+		break;
 
+	}
 }
+
+
+
+gtag('config', 'G-LBRTL3HFG0', {
+	send_page_view: false,
+	page_type: pageType,
+	'allow_google_signals': true,
+	'allow_ad_personalization_signals': false,
+	'debug_mode':true,
+  });
+
+
+gtag('get', 'G-LBRTL3HFG0', 'client_id', clientIDGet => {
+	gtag('set', 'user_properties', {'customer_id' : clientIDGet}); // User_properties = dimension relié a ton utilisateur
+	gtag("event", "page_view");
+}
+	
+);
+
+
+
+
+
+
+
+
 
 
 // tracking of Page end
@@ -116,7 +134,22 @@ if(/details\.html/.test(window.location.pathname)){
 	* use travelDestination JS variable to get travel details
 	* use listName JS variable to get the name of the list if needed
 	*/
+	
 
+	gtag("event", "view_item", {
+		currency: "USD",
+		value: travelDestination.price ,
+		items: [
+		  {
+			item_id: travelDestination.id,
+			item_name: travelDestination.name,
+			item_category: travelDestination.category,
+			item_list_name: listName,
+			price: travelDestination.price,
+			quantity: 1,
+		  }
+		]
+	  });
 	// tracking of Ecommerce detail action end
 }
 
@@ -140,6 +173,13 @@ if(/checkout\.html/.test(window.location.pathname)){
 		/* tracking of first checkout step action begin
 		* use products JS variable to get basket products detail
 		*/
+
+		gtag("event", "view_cart", {
+			currency: "USD",
+			value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+			step: "1",
+			items: products
+		  });
 
 		// tracking of first checkout step action end
 	}
@@ -183,6 +223,23 @@ if(/thankyou\.html/.test(window.location.pathname)){
 	* use totalPrice to get the transaction price
 	* use products JS variable to get travel details
 	*/
+
+	let configuredItemsArr = [];
+
+	products.forEach(item => {
+		configuredItemsArr = [...configuredItemsArr, {...item, price: Number(item.price)}]
+	})
+
+	gtag("event", "purchase", {
+		transaction_id: order55[order55.length -1].orderRef,
+		value: Number(totalPrice),
+		currency: "USD",
+		items: configuredItemsArr
+	});
+
+
+
+
 
 	// tracking of Ecommerce purchase action end
 }

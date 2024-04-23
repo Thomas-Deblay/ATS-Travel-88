@@ -96,7 +96,61 @@ $(function(){
 		* use promotions JS variable to get promotions details
 		*/
 
-		// tracking of Ecommerce promotion views action end
+		// -- Doing it the right way with e-commerce gtag with the doc
+
+		var binaryCoin = false; // Here to not have doublons
+		const carouselItems = document.querySelectorAll('#myCarousel .item'); // The promos that we are listening to see what's one screen or not
+
+		//GET THE PROMO DATA FROM promotions RELATED TO THE PROMO ON SCREEN TO SEND IT TO THE GTAG 
+		function getActivePromo(){
+		const active = document.querySelector('#myCarousel div.carousel-inner div.active ');
+		if (binaryCoin) {
+    		const href = active.querySelector('a').hash.substring(1); // Cela récupère ce qu'il y a après le # dans la destination page
+    		promotions.forEach(promo => {
+				promo.item_name.toLocaleLowerCase() === href 
+					? sendPromoTag(promo) 
+					: '';
+			})
+		}}
+
+		// CHARGE AND SEND THE TAG FOR THE FIRST SLIDE OF THE CAROUSEL
+		window.addEventListener('load', function () {
+			binaryCoin = !binaryCoin;
+			getActivePromo();
+			
+		});
+
+		// SEND ONSCREEN PROMO TAG WHEN CAROUSEL IS CHANGING WHATS ON SCREEN, AND VIEWED BY THE USER
+		carouselItems.forEach((item) => {
+			
+			item.ontransitionend = () => {
+				binaryCoin = !binaryCoin;
+				getActivePromo();
+			}
+		});
+
+		
+		// SEND THE APPROPRITE GTAG IN THE CORRECT FORMAT!
+		function sendPromoTag(promo){
+			 gtag("event", "view_promotion", {
+				creative_name: promo.creative_name, 
+				creative_slot: promo.creative_slot.toString(),
+				promotion_id: promo.promotion_id, 
+				promotion_name: promo.promotion_name,
+				items: [{
+					item_id: promo.item_id,
+					item_name: promo.item_name,
+					index: promo.index,
+					item_category: promo.item_category,
+					item_variant: promo.item_variant,
+					location_id: promo.location_id.toString(),
+					price: Number(promo.price),
+					quantity: Number(promo.quantity)
+			}]
+		});
+	}
+
+	//END OF PROMO TAG
 
 		$(".carousel-inner a").on('click',function(e){
 			var destination = $(this).attr('href').split('#');
@@ -106,7 +160,22 @@ $(function(){
 					/* tracking of Ecommerce promotion click action begin
                     * use promotions[v] JS variable to get promotions details
                     */
-
+					gtag("event", "select_promotion", {
+	
+						items: [{
+						item_id: promotions[v].item_id,
+				item_name: promotions[v].item_name,
+				creative_name: promotions[v].creative_name, 
+				creative_slot: promotions[v].creative_slot.toString(),
+				index: promotions[v].index,
+				item_category: promotions[v].item_category,
+				item_variant: promotions[v].item_variant,
+				location_id: promotions[v].location_id.toString(),
+				price: Number(promotions[v].price),
+				promotion_id: promotions[v].promotion_id, 
+				promotion_name: promotions[v].promotion_name,
+				quantity: Number(promotions[v].quantity)
+					}]})
 					// tracking of Ecommerce promotion click action end
 					break;
 				}
@@ -224,7 +293,26 @@ $(function(){
 		* use products JS variable to get products details
 		* use list JS variable to set list value in products.
 		*/
+		
 
+		let viewItemList = []
+		products.forEach((item) =>{
+			const itemConfigure = {
+				item_id: item.item_id,
+				item_name: item.item_name,
+				index: item.index,
+				item_category: item.item_category ,
+				item_variant: item.item_variant,
+				price: Number(item.price),
+				
+			}
+			 viewItemList = [...viewItemList, itemConfigure]
+			} )
+
+			gtag("event", "view_item_list", {
+				item_list_name: products[0].item_list_name,
+				items: viewItemList
+			  });
 		// tracking of Ecommerce product views in list end
 
 		// Add a listener on each button details to send an event dL select_item on the click
@@ -238,7 +326,20 @@ $(function(){
 							* use products[v] JS variable to get products details
 							* use list JS variable to set list value in actionField.
 							*/
-
+							
+							gtag("event", "select_item", {
+								item_list_name: products[v].item_list_name,
+								items: [
+								  {
+									item_id: products[v].item_id,
+									item_name: products[v].item_name,
+									index: products[v].index,
+									item_category: products[v].item_category ,
+									item_variant: products[v].item_variant,
+									price: Number(products[v].price),
+								  }
+								]
+							  });
 							// tracking of Ecommerce product click in list end
 							break;
 						}
@@ -318,6 +419,22 @@ $(function(){
             * use price JS variable to get product price
             * use quantity JS variable to get product quantity
             */
+
+			
+
+			gtag("event", "add_to_cart", {
+				currency: "USD",
+				value: Number(price) * Number(quantity),
+				items: [
+				  {
+					item_id: id,
+					item_name: name,
+					item_category: category,
+					price: Number(price),
+					quantity: Number(quantity)
+				  }
+				]
+			  });
 
 			// tracking of Ecommerce product add to cart action end
 		});
@@ -416,6 +533,22 @@ $(function(){
 				/* tracking of Ecommerce product remove from cart action begin
                 * use productRemoved JS variable to get removed product detail
                 */
+				
+				console.log(productRemoved)
+
+				gtag("event", "remove_from_cart", {
+					currency: "USD",
+					value: Number(productRemoved.price) * Number(productRemoved.quantity),
+					items: [
+					  {
+						item_id: productRemoved.id,
+						item_name: productRemoved.name,
+						item_category: productRemoved.category,
+						price: Number(productRemoved.price),
+						quantity: Number(productRemoved.quantity)
+					  }
+					]
+				  });
 
 				// tracking of Ecommerce product remove from cart action end
 			});
@@ -527,12 +660,35 @@ $(function(){
 				/* tracking of Ecommerce second checkout step action begin
 				* use products JS variable to get the basket products details
 				*/
+				
+				gtag("event", "begin_checkout", {
+					currency: "USD",
+					value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+					step: "2",
+					items: products
+				  });
+
+				  //ADDING SHIPPING INFO STEP 2.2
+				  gtag("event", "add_shipping_info", {
+					currency: "USD",
+					value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+					step: "2",
+					items: products
+				  });
 
 				// tracking of Ecommerce second checkout step action end
 				document.getElementById('submitButton').addEventListener('click',function(){
 					/* tracking of Ecommerce payment checkout option action begin
 					* use products JS variable to get the basket products details
 					*/
+
+					gtag("event", "add_payment_info", {
+						currency: "USD",
+						value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+						payment_type: "Credit Card",
+						step: "3",
+						items: products
+					  });
 
 					// tracking of Ecommerce payment checkout option action end
 				});
@@ -563,7 +719,10 @@ $(function(){
 			/* tracking of Ecommerce refund action begin
 			* use cancelOrder.orderRef JS variable to get the canceled order Id
 			*/
-
+			gtag("event", "refund", {
+				currency: "USD",
+				transaction_id: cancelOrder.orderRef, // Transaction ID. Required for purchases and refunds.
+			  });
 			// tracking of Ecommerce refund action end
 		});
 	}
