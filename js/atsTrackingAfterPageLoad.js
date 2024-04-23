@@ -660,12 +660,35 @@ $(function(){
 				/* tracking of Ecommerce second checkout step action begin
 				* use products JS variable to get the basket products details
 				*/
+				
+				gtag("event", "begin_checkout", {
+					currency: "USD",
+					value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+					step: "2",
+					items: products
+				  });
+
+				  //ADDING SHIPPING INFO STEP 2.2
+				  gtag("event", "add_shipping_info", {
+					currency: "USD",
+					value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+					step: "2",
+					items: products
+				  });
 
 				// tracking of Ecommerce second checkout step action end
 				document.getElementById('submitButton').addEventListener('click',function(){
 					/* tracking of Ecommerce payment checkout option action begin
 					* use products JS variable to get the basket products details
 					*/
+
+					gtag("event", "add_payment_info", {
+						currency: "USD",
+						value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+						payment_type: "Credit Card",
+						step: "3",
+						items: products
+					  });
 
 					// tracking of Ecommerce payment checkout option action end
 				});

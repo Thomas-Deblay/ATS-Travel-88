@@ -224,5 +224,22 @@ if(/thankyou\.html/.test(window.location.pathname)){
 	* use products JS variable to get travel details
 	*/
 
+	let configuredItemsArr = [];
+
+	products.forEach(item => {
+		configuredItemsArr = [...configuredItemsArr, {...item, price: Number(item.price)}]
+	})
+
+	gtag("event", "purchase", {
+		transaction_id: order55[order55.length -1].orderRef,
+		value: Number(totalPrice),
+		currency: "USD",
+		items: configuredItemsArr
+	});
+
+
+
+
+
 	// tracking of Ecommerce purchase action end
 }
