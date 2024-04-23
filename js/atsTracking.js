@@ -134,9 +134,7 @@ if(/details\.html/.test(window.location.pathname)){
 	* use travelDestination JS variable to get travel details
 	* use listName JS variable to get the name of the list if needed
 	*/
-	console.log(travelDestination)
-	console.log(listName)
-	// console.log(document.querySelectorAll(select))
+	
 
 	gtag("event", "view_item", {
 		currency: "USD",

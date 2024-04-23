@@ -97,12 +97,15 @@ $(function(){
 		*/
 
 		// -- Doing it the right way with e-commerce gtag with the doc
-		var binaryCoin = false;
-		const carouselItems = document.querySelectorAll('#myCarousel .item');
+
+		var binaryCoin = false; // Here to not have doublons
+		const carouselItems = document.querySelectorAll('#myCarousel .item'); // The promos that we are listening to see what's one screen or not
+
+		//GET THE PROMO DATA FROM promotions RELATED TO THE PROMO ON SCREEN TO SEND IT TO THE GTAG 
 		function getActivePromo(){
 		const active = document.querySelector('#myCarousel div.carousel-inner div.active ');
 		if (binaryCoin) {
-    		const href = active.querySelector('a').hash.substring(1); // Cela récupère ce qu'il y a après le #
+    		const href = active.querySelector('a').hash.substring(1); // Cela récupère ce qu'il y a après le # dans la destination page
     		promotions.forEach(promo => {
 				promo.item_name.toLocaleLowerCase() === href 
 					? sendPromoTag(promo) 
@@ -110,13 +113,14 @@ $(function(){
 			})
 		}}
 
+		// CHARGE AND SEND THE TAG FOR THE FIRST SLIDE OF THE CAROUSEL
 		window.addEventListener('load', function () {
 			binaryCoin = !binaryCoin;
 			getActivePromo();
 			
 		});
 
-
+		// SEND ONSCREEN PROMO TAG WHEN CAROUSEL IS CHANGING WHATS ON SCREEN, AND VIEWED BY THE USER
 		carouselItems.forEach((item) => {
 			
 			item.ontransitionend = () => {
@@ -126,7 +130,7 @@ $(function(){
 		});
 
 		
-		// SEND THE APPROPRITE GTAG !
+		// SEND THE APPROPRITE GTAG IN THE CORRECT FORMAT!
 		function sendPromoTag(promo){
 			 gtag("event", "view_promotion", {
 				creative_name: promo.creative_name, 
@@ -146,30 +150,7 @@ $(function(){
 		});
 	}
 
-
-		// ====== THIS WAS ALL ME GOING IN THE WRONG DIRECTION, TRYING TO HARD CODE IT ===========
-		// console.log(promotions)
-		// let arrayOfParams = []
-		// promotions.forEach((promo) =>{
-		// 	const valProm =  `cn${promo.creative_name}~cs${promo.creative_slot}~pi${promo.promotion_id}~pn${promo.item_name}`;
-		// 	 arrayOfParams = [...arrayOfParams, valProm]
-		// 	} )
-	
-
-		// 	const eventParams = {};
-		// 	arrayOfParams.forEach((PromoParams, index) => {
-				
-		// 		eventParams['pr' + (index + 1)] = PromoParams;
-		// 	})
-		// 	console.log(eventParams)
-		// gtag('event', 'view_promotion', eventParams)
-
-
-		// console.log(arrayOfParams)
-		// console.log(promotions)
-		
-
-		// tracking of Ecommerce promotion views action end
+	//END OF PROMO TAG
 
 		$(".carousel-inner a").on('click',function(e){
 			var destination = $(this).attr('href').split('#');
@@ -312,7 +293,7 @@ $(function(){
 		* use products JS variable to get products details
 		* use list JS variable to set list value in products.
 		*/
-		console.log(products)
+		
 
 		let viewItemList = []
 		products.forEach((item) =>{
@@ -439,6 +420,22 @@ $(function(){
             * use quantity JS variable to get product quantity
             */
 
+			
+
+			gtag("event", "add_to_cart", {
+				currency: "USD",
+				value: Number(price) * Number(quantity),
+				items: [
+				  {
+					item_id: id,
+					item_name: name,
+					item_category: category,
+					price: Number(price),
+					quantity: Number(quantity)
+				  }
+				]
+			  });
+
 			// tracking of Ecommerce product add to cart action end
 		});
 			
@@ -536,6 +533,22 @@ $(function(){
 				/* tracking of Ecommerce product remove from cart action begin
                 * use productRemoved JS variable to get removed product detail
                 */
+				
+				console.log(productRemoved)
+
+				gtag("event", "remove_from_cart", {
+					currency: "USD",
+					value: Number(productRemoved.price) * Number(productRemoved.quantity),
+					items: [
+					  {
+						item_id: productRemoved.id,
+						item_name: productRemoved.name,
+						item_category: productRemoved.category,
+						price: Number(productRemoved.price),
+						quantity: Number(productRemoved.quantity)
+					  }
+					]
+				  });
 
 				// tracking of Ecommerce product remove from cart action end
 			});
