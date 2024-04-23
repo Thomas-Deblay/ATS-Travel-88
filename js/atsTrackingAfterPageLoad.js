@@ -97,33 +97,54 @@ $(function(){
 		*/
 
 		// -- Doing it the right way with e-commerce gtag with the doc
+		var binaryCoin = false;
+		const carouselItems = document.querySelectorAll('#myCarousel .item');
+		function getActivePromo(){
+		const active = document.querySelector('#myCarousel div.carousel-inner div.active ');
+		if (binaryCoin) {
+    		const href = active.querySelector('a').hash.substring(1); // Cela récupère ce qu'il y a après le #
+    		promotions.forEach(promo => {
+				promo.item_name.toLocaleLowerCase() === href 
+					? sendPromoTag(promo) 
+					: '';
+			})
+		}}
 
-		console.log(promotions)
-		let itemList = []
-		promotions.forEach((promo) =>{
-			const itemConfigure = {
-				item_id: promo.item_id,
-				item_name: promo.item_name,
+		window.addEventListener('load', function () {
+			binaryCoin = !binaryCoin;
+			getActivePromo();
+			
+		});
+
+
+		carouselItems.forEach((item) => {
+			
+			item.ontransitionend = () => {
+				binaryCoin = !binaryCoin;
+				getActivePromo();
+			}
+		});
+
+		
+		// SEND THE APPROPRITE GTAG !
+		function sendPromoTag(promo){
+			 gtag("event", "view_promotion", {
 				creative_name: promo.creative_name, 
 				creative_slot: promo.creative_slot.toString(),
-				index: promo.index,
-				item_category: promo.item_category,
-				item_variant: promo.item_variant,
-				location_id: promo.location_id.toString(),
-				price: Number(promo.price),
 				promotion_id: promo.promotion_id, 
 				promotion_name: promo.promotion_name,
-				quantity: Number(promo.quantity)
-				
-			}
-			 itemList = [...itemList, itemConfigure]
-			} )
-
-		console.log('Item List', itemList)
-
-		gtag("event", "view_promotion", {
-  			items: itemList
-		})
+				items: [{
+					item_id: promo.item_id,
+					item_name: promo.item_name,
+					index: promo.index,
+					item_category: promo.item_category,
+					item_variant: promo.item_variant,
+					location_id: promo.location_id.toString(),
+					price: Number(promo.price),
+					quantity: Number(promo.quantity)
+			}]
+		});
+	}
 
 
 		// ====== THIS WAS ALL ME GOING IN THE WRONG DIRECTION, TRYING TO HARD CODE IT ===========
