@@ -3,10 +3,7 @@
 
 console.log("EXERCICES w/ GTM")
 
-//DataLayer init 
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+
 
 // GET Page_type 
 const path = document.location.pathname;
@@ -48,14 +45,14 @@ switch (match[0]) {
 }
 
 
-//GTAG INIT
-gtag('config', 'G-P0JBL70QY4', {
-	send_page_view: false,
-	page_type: pageType,
-	'allow_google_signals': true,
-	'allow_ad_personalization_signals': false,
-	'debug_mode':true,
-  });
+// //GTAG INIT
+// gtag('config', 'G-P0JBL70QY4', {
+// 	send_page_view: false,
+// 	page_type: pageType,
+// 	'allow_google_signals': true,
+// 	'allow_ad_personalization_signals': false,
+// 	'debug_mode':true,
+//   });
 
 //GTM Init
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
