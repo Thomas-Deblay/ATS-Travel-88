@@ -1,12 +1,53 @@
 /* tracking of Page begin
 */
 
-console.log("EXERCICE w/ GTM")
+console.log("EXERCICES w/ GTM")
 
 //DataLayer init 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
+
+// GET Page_type 
+const path = document.location.pathname;
+const regex = /[^\/]+\.html$/;
+const match = path.match(regex);
+var pageType; 
+
+
+
+if (!match) {
+    if (path === '/ATS-Travel-88/') { // This path is specific to my hosting set up and design the root / of the website
+        pageType = 'Home';  
+    } 
+} else {
+switch (match[0]) {
+	case 'index.html':
+		pageType = 'Home';
+		break;
+	case "destinations.html" : 
+		pageType = 'All travels list';
+		break;
+	case "details.html" : 
+		pageType = 'Travel page';
+		break;
+	case "login.html" :
+		pageType = 'User connection';
+		break;
+	case "basket.html" : 
+		pageType = 'Cart';
+		break;
+	case "checkout.html" : 
+		pageType =  'Checkout';
+	break;
+	case "thankyou.html" :
+		pagetype = 'Confirmation';
+		break;
+
+	}
+}
+
+
 //GTAG INIT
 gtag('config', 'G-LBRTL3HFG0', {
 	send_page_view: false,
