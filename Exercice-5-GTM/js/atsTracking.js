@@ -49,7 +49,7 @@ switch (match[0]) {
 
 
 //GTAG INIT
-gtag('config', 'G-LBRTL3HFG0', {
+gtag('config', 'G-P0JBL70QY4', {
 	send_page_view: false,
 	page_type: pageType,
 	'allow_google_signals': true,
