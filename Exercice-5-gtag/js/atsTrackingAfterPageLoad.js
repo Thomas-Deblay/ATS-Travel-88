@@ -132,7 +132,7 @@ $(function(){
 		
 		// SEND THE APPROPRITE GTAG IN THE CORRECT FORMAT!
 		function sendPromoTag(promo){
-			 gtag("event", "view_promotion", {
+			const eventParamter = {
 				creative_name: promo.creative_name, 
 				creative_slot: promo.creative_slot.toString(),
 				promotion_id: promo.promotion_id, 
@@ -147,7 +147,8 @@ $(function(){
 					price: Number(promo.price),
 					quantity: Number(promo.quantity)
 			}]
-		});
+		}
+		if(eventParamter) gtag("event", "view_promotion", eventParamter);
 	}
 
 	//END OF PROMO TAG

@@ -5,7 +5,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 //Exercice 3
-console.log('EXERCICE 3')
+console.log('EXERCICE 4')
 const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
