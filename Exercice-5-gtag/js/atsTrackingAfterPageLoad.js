@@ -723,6 +723,7 @@ $(function(){
 			gtag("event", "refund", {
 				currency: "USD",
 				transaction_id: cancelOrder.orderRef, // Transaction ID. Required for purchases and refunds.
+				value: Number(top.totalPrice)
 			  });
 			// tracking of Ecommerce refund action end
 		});
