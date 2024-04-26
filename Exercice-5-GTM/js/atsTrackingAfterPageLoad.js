@@ -116,7 +116,7 @@ $(function(){
 		$("#viewDestination a").on('click',function(e){
 			/* tracking of View Destinations button click begin
 			*/
-			
+			window.dataLayer.push({'event': 'cta_click', 'click_category':'home', 'click_action': 'click','click_label': 'view destinations' });
 			// tracking of View Destinations button click end
 		});
 		
