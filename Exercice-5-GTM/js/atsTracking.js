@@ -1,6 +1,53 @@
 /* tracking of Page begin
 */
 
+// GET Page_type 
+const path = document.location.pathname;
+const regex = /[^\/]+\.html$/;
+const match = path.match(regex);
+var pageType;
+
+if (!match) {
+	const regexTesting = /^\/ATS-Travel-88\/Exercice-5-GTM\/\?gtm_debug=[^&]*$/;
+    
+    if (path === '/ATS-Travel-88/Exercice-5-GTM/') { // This path is specific to my hosting set up and design the root / of the website
+        pageType =  'Home';  
+    } 
+	else if(  regexTesting.test(path) ) {
+		pageType =  'Home';  
+	}
+} else {
+switch (match[0]) {
+	case 'index.html':
+		pageType = 'Home';
+		break;
+	case "destinations.html" : 
+		pageType = 'All travels list';
+		break;
+	case "details.html" : 
+		pageType = 'Travel page';
+		break;
+	case "login.html" :
+		pageType = 'User connection';
+		break;
+	case "basket.html" : 
+		pageType = 'Cart';
+		break;
+	case "checkout.html" : 
+		pageType =  'Checkout';
+	break;
+	case "thankyou.html" :
+		pagetype = 'Confirmation';
+		break;
+
+	}
+}
+
+// Send page_type to the dataLayer
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'event': 'page_view', 'page_type': pageType });
+
+
 //GTM Init
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -9,69 +56,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5LP5C32Z');
 
 
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({'event': 'page_view', 'page_type':$page_type });
-
-
-// // GET Page_type 
-// const path = document.location.pathname;
-// const regex = /[^\/]+\.html$/;
-// const match = path.match(regex);
-// window.dataLayer = window.dataLayer || [];
-
-
-
-
-// if (!match) {
-// 	const regexTesting = /^\/ATS-Travel-88\/Exercice-5-GTM\/\?gtm_debug=[^&]*$/;
-    
-//     if (path === '/ATS-Travel-88/Exercice-5-GTM/') { // This path is specific to my hosting set up and design the root / of the website
-//         dataLayer.push({'page_type' : 'Home'}) ;  
-//     } 
-// 	else if(  regexTesting.test(path) ) {
-// 		dataLayer.push({'page_type' : 'Home'}) ;  
-// 	}
-// } else {
-// switch (match[0]) {
-// 	case 'index.html':
-// 		dataLayer.push({'page_type' : 'Home'});
-// 		break;
-// 	case "destinations.html" : 
-// 		dataLayer.push({'page_type' : 'All travels list'});
-// 		break;
-// 	case "details.html" : 
-// 		dataLayer.push({'page_type' :  'Travel page'});
-// 		break;
-// 	case "login.html" :
-// 		dataLayer.push({'page_type' : 'User connection'});
-// 		break;
-// 	case "basket.html" : 
-// 		dataLayer.push({'page_type' : 'Cart'});
-// 		break;
-// 	case "checkout.html" : 
-// 		dataLayer.push({'page_type' : 'Checkout'}) ;
-// 	break;
-// 	case "payment.html" : 
-// 		dataLayer.push({'page_type' : 'Payment'}) ;
-// 	break;
-// 	case "thankyou.html" :
-// 		dataLayer.push({'page_type' :  'Confirmation'});
-// 		break;
-
-// 	}
-// }
-
-
-// console.log(dataLayer)
-
-// //GTAG INIT
-// gtag('config', 'G-P0JBL70QY4', {
-// 	send_page_view: false,
-// 	page_type: pageType,
-// 	'allow_google_signals': true,
-// 	'allow_ad_personalization_signals': false,
-// 	'debug_mode':true,
-//   });
 
 
 // tracking of Page end
