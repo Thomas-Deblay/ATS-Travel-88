@@ -11,40 +11,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
+
 // GET Page_type 
 const path = document.location.pathname;
 const regex = /[^\/]+\.html$/;
 const match = path.match(regex);
+window.dataLayer = window.dataLayer || [];
 
 
 
 
 if (!match) {
     if (path === '/ATS-Travel-88/') { // This path is specific to my hosting set up and design the root / of the website
-        dataLayer.push({page_type : 'Home'}) ;  
+        window.dataLayer.push({'page_type' : 'Home'}) ;  
     } 
 } else {
 switch (match[0]) {
 	case 'index.html':
-		dataLayer.push({page_type : 'Home'});
+		window.dataLayer.push({'page_type' : 'Home'});
 		break;
 	case "destinations.html" : 
-		dataLayer.push({page_type : 'All travels list'});
+		window.dataLayer.push({'page_type' : 'All travels list'});
 		break;
 	case "details.html" : 
-		dataLayer.push({page_type :  'Travel page'});
+		window.dataLayer.push({'page_type' :  'Travel page'});
 		break;
 	case "login.html" :
-		dataLayer.push({page_type : 'User connection'});
+		window.dataLayer.push({'page_type' : 'User connection'});
 		break;
 	case "basket.html" : 
-		dataLayer.push({page_type : 'Cart'});
+		window.dataLayer.push({'page_type' : 'Cart'});
 		break;
 	case "checkout.html" : 
-		dataLayer.push({page_type : 'Checkout'}) ;
+		window.dataLayer.push({'page_type' : 'Checkout'}) ;
 	break;
 	case "thankyou.html" :
-		dataLayer.push({page_type :  'Confirmation'});
+		window.dataLayer.push({'page_type' :  'Confirmation'});
 		break;
 
 	}
