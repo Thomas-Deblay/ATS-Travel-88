@@ -22,7 +22,7 @@ window.dataLayer = window.dataLayer || [];
 
 
 if (!match) {
-	const regexTesting = /^\/ATS-Travel-88\/Exercice-5-GTM\/(\?.*)?$/;
+	const regexTesting = /^\/ATS-Travel-88\/Exercice-5-GTM\/\?gtm_debug=[^&]*$/;
     
     if (path === '/ATS-Travel-88/Exercice-5-GTM/') { // This path is specific to my hosting set up and design the root / of the website
         dataLayer.push({'page_type' : 'Home'}) ;  
