@@ -50,6 +50,9 @@ switch (match[0]) {
 	case "checkout.html" : 
 		dataLayer.push({'page_type' : 'Checkout'}) ;
 	break;
+	case "payment.html" : 
+		dataLayer.push({'page_type' : 'Payment'}) ;
+	break;
 	case "thankyou.html" :
 		dataLayer.push({'page_type' :  'Confirmation'});
 		break;
