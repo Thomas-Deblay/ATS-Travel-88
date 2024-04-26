@@ -22,7 +22,7 @@ window.dataLayer = window.dataLayer || [];
 
 
 if (!match) {
-    if (path === '/ATS-Travel-88/') { // This path is specific to my hosting set up and design the root / of the website
+    if (path === '/ATS-Travel-88/Exercice-5-GTM/') { // This path is specific to my hosting set up and design the root / of the website
         window.dataLayer.push({'page_type' : 'Home'}) ;  
     } 
 } else {
