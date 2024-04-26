@@ -28,30 +28,32 @@ if (!match) {
 } else {
 switch (match[0]) {
 	case 'index.html':
-		window.dataLayer.push({'page_type' : 'Home'});
+		dataLayer.push({'page_type' : 'Home'});
 		break;
 	case "destinations.html" : 
-		window.dataLayer.push({'page_type' : 'All travels list'});
+		dataLayer.push({'page_type' : 'All travels list'});
 		break;
 	case "details.html" : 
-		window.dataLayer.push({'page_type' :  'Travel page'});
+		dataLayer.push({'page_type' :  'Travel page'});
 		break;
 	case "login.html" :
-		window.dataLayer.push({'page_type' : 'User connection'});
+		dataLayer.push({'page_type' : 'User connection'});
 		break;
 	case "basket.html" : 
-		window.dataLayer.push({'page_type' : 'Cart'});
+		dataLayer.push({'page_type' : 'Cart'});
 		break;
 	case "checkout.html" : 
-		window.dataLayer.push({'page_type' : 'Checkout'}) ;
+		dataLayer.push({'page_type' : 'Checkout'}) ;
 	break;
 	case "thankyou.html" :
-		window.dataLayer.push({'page_type' :  'Confirmation'});
+		dataLayer.push({'page_type' :  'Confirmation'});
 		break;
 
 	}
 }
 
+
+console.log(dataLayer)
 
 // //GTAG INIT
 // gtag('config', 'G-P0JBL70QY4', {
