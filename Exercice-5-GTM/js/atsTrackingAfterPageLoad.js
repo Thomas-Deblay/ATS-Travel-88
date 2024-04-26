@@ -507,9 +507,8 @@ $(function(){
 
 				/* tracking of virtual page view on payment page begin
 				*/
-				gtag('event', 'page_view', {
-					page_location: 'https://thomas-deblay.github.io/ATS-Travel-88/payment.html',
-				  });
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push({'event': 'page_view', 'page_type':'Payment','page_name': '/payment.html' });
 
 				// tracking of virtual page view on payment page end
 				history.pushState({}, 'Payment | ATS Travel Website', 'payment.html');

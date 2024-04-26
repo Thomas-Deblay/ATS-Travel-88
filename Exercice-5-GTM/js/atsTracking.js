@@ -37,7 +37,7 @@ switch (match[0]) {
 		pageType =  'Checkout';
 	break;
 	case "thankyou.html" :
-		pagetype = 'Confirmation';
+		pageType = 'Confirmation';
 		break;
 
 	}
