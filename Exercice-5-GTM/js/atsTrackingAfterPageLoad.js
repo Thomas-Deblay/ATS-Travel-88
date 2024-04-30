@@ -96,6 +96,59 @@ $(function(){
 		* use promotions JS variable to get promotions details
 		*/
 
+		var binaryCoin = false; // Here to not have doublons
+		const carouselItems = document.querySelectorAll('#myCarousel .item'); // The promos that we are listening to see what's one screen or not
+
+		//GET THE PROMO DATA FROM promotions RELATED TO THE PROMO ON SCREEN TO SEND IT TO THE GTAG 
+		function getActivePromo(){
+		const active = document.querySelector('#myCarousel div.carousel-inner div.active ');
+		if (binaryCoin) {
+    		const href = active.querySelector('a').hash.substring(1); // Cela récupère ce qu'il y a après le # dans la destination page
+    		promotions.forEach(promo => {
+				promo.item_name.toLocaleLowerCase() === href 
+					? sendPromoTag(promo) 
+					: '';
+			})
+		}}
+
+		// CHARGE AND SEND THE TAG FOR THE FIRST SLIDE OF THE CAROUSEL
+		window.addEventListener('load', function () {
+			binaryCoin = !binaryCoin;
+			getActivePromo();
+			
+		});
+
+		// SEND ONSCREEN PROMO TAG WHEN CAROUSEL IS CHANGING WHATS ON SCREEN, AND VIEWED BY THE USER
+		carouselItems.forEach((item) => {
+			
+			item.ontransitionend = () => {
+				binaryCoin = !binaryCoin;
+				getActivePromo();
+			}
+		});
+
+		
+		// SEND THE APPROPRITE GTAG IN THE CORRECT FORMAT!
+		function sendPromoTag(promo){
+			const eventParamter = {
+				creative_name: promo.creative_name, 
+				creative_slot: promo.creative_slot.toString(),
+				promotion_id: promo.promotion_id, 
+				promotion_name: promo.promotion_name,
+				items: [{
+					item_id: promo.item_id,
+					item_name: promo.item_name,
+					index: promo.index,
+					item_category: promo.item_category,
+					item_variant: promo.item_variant,
+					location_id: promo.location_id.toString(),
+					price: Number(promo.price),
+					quantity: Number(promo.quantity)
+			}]
+		}
+		if(eventParamter) dataLayer.push({event: "view_promotion", ecommerce: eventParamter});
+	}
+
 		// tracking of Ecommerce promotion views action end
 
 		$(".carousel-inner a").on('click',function(e){
