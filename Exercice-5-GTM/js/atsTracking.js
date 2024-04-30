@@ -163,6 +163,13 @@ if(/checkout\.html/.test(window.location.pathname)){
 		* use products JS variable to get basket products detail
 		*/
 
+		dataLayer.push({event: "view_cart", ecommerce : {
+			currency: "USD",
+			value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+			items: products
+		  }, _clear: true 
+		});
+
 		// tracking of first checkout step action end
 	}
 	
