@@ -123,6 +123,22 @@ if(/details\.html/.test(window.location.pathname)){
 	* use listName JS variable to get the name of the list if needed
 	*/
 
+	dataLayer.push({event: "view_item", ecommerce: {
+		currency: "USD",
+		value: travelDestination.price ,
+		items: [
+		  {
+			item_id: travelDestination.id,
+			item_name: travelDestination.name,
+			item_category: travelDestination.category,
+			item_list_name: listName,
+			price: travelDestination.price,
+			quantity: 1,
+		  }
+		]
+	  }, _clear: true
+	});
+
 	// tracking of Ecommerce detail action end
 }
 
