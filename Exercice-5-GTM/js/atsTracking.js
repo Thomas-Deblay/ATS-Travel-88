@@ -213,5 +213,19 @@ if(/thankyou\.html/.test(window.location.pathname)){
 	* use products JS variable to get travel details
 	*/
 
+	let configuredItemsArr = [];
+
+	products.forEach(item => {
+		configuredItemsArr = [...configuredItemsArr, {...item, price: Number(item.price)}]
+	})
+
+	dataLayer.push({event: "purchase", ecommerce: {
+		transaction_id: order55[order55.length -1].orderRef,
+		value: Number(totalPrice),
+		currency: "USD",
+		items: configuredItemsArr
+	}, _clear: true
+});
+
 	// tracking of Ecommerce purchase action end
 }
