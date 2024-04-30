@@ -540,6 +540,21 @@ $(function(){
                 * use productRemoved JS variable to get removed product detail
                 */
 
+				dataLayer.push({event: "remove_from_cart", ecommerce:  {
+					currency: "USD",
+					value: Number(productRemoved.price) * Number(productRemoved.quantity),
+					items: [
+					  {
+						item_id: productRemoved.id,
+						item_name: productRemoved.name,
+						item_category: productRemoved.category,
+						price: Number(productRemoved.price),
+						quantity: Number(productRemoved.quantity)
+					  }
+					]
+				  }, _clear: true
+				});
+				
 				// tracking of Ecommerce product remove from cart action end
 			});
 		}
