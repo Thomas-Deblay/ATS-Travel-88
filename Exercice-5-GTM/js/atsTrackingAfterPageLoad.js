@@ -426,6 +426,22 @@ $(function(){
             * use quantity JS variable to get product quantity
             */
 
+			dataLayer.push({
+				event: "add_to_cart", ecommerce: {
+					currency: "USD",
+					value: Number(price) * Number(quantity),
+					items: [
+					{
+						item_id: id,
+						item_name: name,
+						item_category: category,
+						price: Number(price),
+						quantity: Number(quantity)
+					}
+					]
+			  }, _clear: true
+			});
+
 			// tracking of Ecommerce product add to cart action end
 		});
 			
