@@ -725,6 +725,13 @@ $(function(){
 			* use cancelOrder.orderRef JS variable to get the canceled order Id
 			*/
 
+			dataLayer.push({event: "refund", ecommerce: {
+				currency: "USD",
+				transaction_id: cancelOrder.orderRef, // Transaction ID. Required for purchases and refunds.
+				value: Number(top.totalPrice)
+			  }, _clear: true
+			});
+
 			// tracking of Ecommerce refund action end
 		});
 	}
