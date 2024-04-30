@@ -297,6 +297,25 @@ $(function(){
 		* use list JS variable to set list value in products.
 		*/
 
+		let viewItemList = []
+		products.forEach((item) =>{
+			const itemConfigure = {
+				item_id: item.item_id,
+				item_name: item.item_name,
+				index: item.index,
+				item_category: item.item_category ,
+				item_variant: item.item_variant,
+				price: Number(item.price),
+				
+			}
+			 viewItemList = [...viewItemList, itemConfigure]
+			} )
+
+			dataLayer.push({event: "view_item_list", ecommerce:  {
+				item_list_name: products[0].item_list_name,
+				items: viewItemList
+			  }});
+
 		// tracking of Ecommerce product views in list end
 
 		// Add a listener on each button details to send an event dL select_item on the click
