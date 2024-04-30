@@ -176,7 +176,7 @@ $(function(){
 						promotion_name: promotions[v].promotion_name,
 						quantity: Number(promotions[v].quantity)
 						}]
-					}
+					}, _clear: true
 				})
 
 					// tracking of Ecommerce promotion click action end
