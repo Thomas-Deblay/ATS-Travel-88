@@ -314,7 +314,8 @@ $(function(){
 			dataLayer.push({event: "view_item_list", ecommerce:  {
 				item_list_name: products[0].item_list_name,
 				items: viewItemList
-			  }});
+			  }, _clear: true
+			});
 
 		// tracking of Ecommerce product views in list end
 
