@@ -673,11 +673,27 @@ $(function(){
 				  }, clear: true
 				});
 				
+
+				dataLayer.push({event: "add_shipping_info", ecommerce: {
+					currency: "USD",
+					value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+					items: products
+				  }, _clear: true});
+
 				// tracking of Ecommerce second checkout step action end
 				document.getElementById('submitButton').addEventListener('click',function(){
 					/* tracking of Ecommerce payment checkout option action begin
 					* use products JS variable to get the basket products details
 					*/
+
+					  dataLayer.push({event: "add_payment_info", ecommerce: {
+						currency: "USD",
+						value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+						payment_type: "Credit Card",
+						step: "3",
+						items: products
+					  }, _clear: true
+					});
 
 					// tracking of Ecommerce payment checkout option action end
 				});
