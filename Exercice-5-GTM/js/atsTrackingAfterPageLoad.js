@@ -330,6 +330,21 @@ $(function(){
 							* use products[v] JS variable to get products details
 							* use list JS variable to set list value in actionField.
 							*/
+							
+							dataLayer.push({event: "select_item", ecommerce: {
+								item_list_name: products[v].item_list_name,
+								items: [
+								  {
+									item_id: products[v].item_id,
+									item_name: products[v].item_name,
+									index: products[v].index,
+									item_category: products[v].item_category ,
+									item_variant: products[v].item_variant,
+									price: Number(products[v].price),
+								  }
+								]
+							  }, _clear: true
+							});
 
 							// tracking of Ecommerce product click in list end
 							break;
