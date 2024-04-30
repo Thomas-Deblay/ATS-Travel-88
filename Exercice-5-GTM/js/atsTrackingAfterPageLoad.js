@@ -666,6 +666,13 @@ $(function(){
 				* use products JS variable to get the basket products details
 				*/
 
+				dataLayer.push({event: "begin_checkout", ecommerce: {
+					currency: "USD",
+					value: products.reduce((acc,curr) => acc + (curr.price * curr.quantity), 0),
+					items: products
+				  }, clear: true
+				});
+				
 				// tracking of Ecommerce second checkout step action end
 				document.getElementById('submitButton').addEventListener('click',function(){
 					/* tracking of Ecommerce payment checkout option action begin
