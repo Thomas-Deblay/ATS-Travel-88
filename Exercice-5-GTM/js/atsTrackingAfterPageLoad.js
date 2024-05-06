@@ -98,6 +98,7 @@ $(function(){
 
 		var binaryCoin = false; // Here to not have doublons
 		const carouselItems = document.querySelectorAll('#myCarousel .item'); // The promos that we are listening to see what's one screen or not
+		let sentPromos = [];
 
 		//GET THE PROMO DATA FROM promotions RELATED TO THE PROMO ON SCREEN TO SEND IT TO THE GTAG 
 		function getActivePromo(){
@@ -146,7 +147,12 @@ $(function(){
 					quantity: Number(promo.quantity)
 			}]
 		}
-		if(eventParamter) dataLayer.push({event: "view_promotion", ecommerce: eventParamter});
+		// Faire une function pour checker si la promotion n'a pas déjà été envoyé
+		const isNotSent = !sentPromos.includes(eventParamter.items[0].item_id);
+		if(eventParamter && isNotSent) {
+			dataLayer.push({event: "view_promotion", ecommerce: eventParamter});
+			sentPromos = [...sentPromos, eventParamter.items[0].item_id];
+		};
 	}
 
 		// tracking of Ecommerce promotion views action end
