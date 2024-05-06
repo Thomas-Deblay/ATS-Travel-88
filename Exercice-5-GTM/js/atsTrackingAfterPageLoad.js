@@ -317,11 +317,104 @@ $(function(){
 			 viewItemList = [...viewItemList, itemConfigure]
 			} )
 
-			dataLayer.push({event: "view_item_list", ecommerce:  {
+
+// ============ VIEW_ITEM_LIST --- BATCH QUEU SENDING DATA THAT HAVE BEEN REALLY SEEN BY USER ================
+let batchQueu = []
+// Definir ou se trouve les articles dans la DOM
+const vignettes = document.querySelectorAll('[data-productid]');
+
+// Creez une fonction pour recuperer les informations des articles
+function getDestinationId(article) {
+  const getId = article.getAttribute('data-productid');
+
+  if (getId) {
+    const id = getId.trim();
+    return id;
+  }
+  return null;
+}
+
+// Creez une fonction pour envoyer les élément vue dans une batch queu avec toutes les informations nécéssaire
+function displayArticleId(article) {
+  const info = getDestinationId(article);
+  const getItemInfo = viewItemList.filter(item => item.item_id === info)
+  if (info) {
+    batchQueu = [...batchQueu, getItemInfo[0]];
+	console.log(batchQueu);
+  }
+}
+
+// Creer notre observer pour savoir quand un article s'affiche sur l'ecran et l'afficher dans la console (*1)
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const destination = entry.target;
+        // Verifie si l'article n'a pas deja ete affiché
+        if (!destination.getAttribute('data-displayed')) {
+          displayArticleId(destination);
+          console.log('');
+          // Marquez l'article comme affiché pour éviter les doublons
+          destination.setAttribute('data-displayed', 'true');
+        }
+      }
+    });
+  },
+  {
+    // Juste histoire de rendre l'experience un petit peu plus smooth (operraatooorrrrrr)
+    threshold: 0.7,
+  }
+);
+
+// Creer une fonction permerttant d'observer le chargement de nouveaux articles dans la DOM et lancer notre observer (*2)
+function theAnswer(vignettes) {
+  // Creer un mutationObserver pour capter le chargement de nouveaux articles dans la DOM
+  const mutationObserver = new MutationObserver((mutations) => {
+    if (mutations) {
+      //Si oui, on relance la fonction avec les nouveaux articles de la DOM mise a jour
+      vignettes = document.querySelectorAll('[data-productid]');
+      theAnswer(vignettes);
+    }
+  });
+
+  // Definir le Node parent des articles
+  const vignettesParent = document.querySelector('#content-chooser');
+
+  //Lancer le mutation observer qui verifie un changement dans la liste des articles
+  mutationObserver.observe(vignettesParent, { childList: true });
+  // Lancer notre observer avec la bonne liste d'article actualise
+  vignettes.forEach((vignette) => {
+    observer.observe(vignette);
+  });
+}
+
+theAnswer(vignettes);
+
+// ==================== END OF BATCH QUEU VIEW_ITEM_LIST =======================
+
+// ========= Sending the product seen as view_item_list event =====================
+// ------- Note: for now, we are just sending when the user leaves the page. We Should have : 
+//					- When user leave the page
+//					- When 10 items are in the batchQueu
+// 					- when the user is inactive for 60 secondes
+// =================================================
+
+// ==== When user leaves the page
+	window.addEventListener('beforeunload', (event) => {
+    // Process the batch queue
+    	dataLayer.push({event: "view_item_list", ecommerce:  {
 				item_list_name: products[0].item_list_name,
-				items: viewItemList
+				items: batchQueu
 			  }, _clear: true
 			});
+
+});
+
+
+// When 10 items are in the batch Queu
+
+// When user is inactive for 60 secondes
+			
 
 		// tracking of Ecommerce product views in list end
 
