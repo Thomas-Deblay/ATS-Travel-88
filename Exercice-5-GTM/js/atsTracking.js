@@ -45,10 +45,6 @@ switch (match[0]) {
 
 // Send page_type to the dataLayer
 window.dataLayer = window.dataLayer || [];
-gtag('get', 'G-LBRTL3HFG0', 'client_id', clientIDGet => {
-	window.dataLayer.push( {'customer_id' : clientIDGet}); // push client id into DLV
-}
-)
 window.dataLayer.push({'event': 'page_view', 'page_type': pageType });
 
 
@@ -58,6 +54,7 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5LP5C32Z');
+
 
 
 
