@@ -287,7 +287,8 @@ function createTableau(){
 
 function getAllRelatedTagsToTrigger(colonne){
     //return tag.filter((x) => x.firingTriggerId.some((id) => id.includes(colonne.triggerEvent.triggerId)));
-    return tag.forEach((x) => x.firingTriggerId);
+     
+    console.log(tag.forEach((x) => x.firingTriggerId));
 }
 
 /**---------------------------------------------
@@ -300,4 +301,4 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(tableauEventPush.map((el) => getAllRelatedTagsToTrigger(el)))
+console.log(getAllRelatedTagsToTrigger('test'))
