@@ -234,16 +234,17 @@ function getEventSettingsVariables(){
 }
 
 function createDataLayerPush(event, variables){
-    let push = {};
+    let push = 'dataLayer.push(\n{\n';
     if(event){
-        push = {...push, event : `$${event}`}
+        push += `event : $${event}\n`;
     }
 
     for(let variable of variables){
-        push = {...push, [variable]:`$${variable}` }
+        push += `${variable} : $${variable}\n`;
     }
 
-    return JSON.stringify(push);
+    push += '}\n)';
+    return push;
 }
 
 /**---------------------------------------------
