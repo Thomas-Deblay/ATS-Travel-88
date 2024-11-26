@@ -193,8 +193,10 @@ function getVariablesListFromNameEventSettings(name){
 
 function checkIfDLVVariable(variableName){
     for (let x of variable){
-        if(x.name===variableName && x.type==='v'){
-            return true;
+        if(x.name===variableName){
+            if(x.type==='v'){
+                return true;
+            }
         }
     }
     return false;
@@ -203,7 +205,7 @@ function checkIfDLVVariable(variableName){
 function returnListOfVaribaleNamesFromList(list){
     const listOfNames = list.map((x) => x.map[1].value);
 
-    return listOfNames;
+    return listOfNames.filter((x) => checkIfDLVVariable(x));
 }
 
 function getEventSettingsVariables(){
