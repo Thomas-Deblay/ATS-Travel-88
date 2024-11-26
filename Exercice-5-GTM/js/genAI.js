@@ -191,6 +191,21 @@ function getVariablesListFromNameEventSettings(name){
     return null;
 }
 
+function checkIfDLVVariable(variableName){
+    for (let x of variable){
+        if(x.name===variableName && x.type==='v'){
+            return true;
+        }
+    }
+    return false;
+}
+
+function returnListOfVaribaleNamesFromList(list){
+    const listOfNames = list.map((x) => x.map[1].value);
+
+    return listOfNames.filter((x) => checkIfDLVVariable(x));
+}
+
 function getEventSettingsVariables(){
     const googleTag = tag.filter((x)=> x.type==='googtag')
     const parameterArray = googleTag[0].parameter;
@@ -203,8 +218,7 @@ function getEventSettingsVariables(){
 
     let listOfVaribales = getVariablesListFromNameEventSettings(eventSettings);
 
-
-    return listOfVaribales.map((x) => x.map[1].value);
+    return returnListOfVaribaleNamesFromList(listOfVaribales);
 }
 
 /**---------------------------------------------
