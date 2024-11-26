@@ -184,7 +184,14 @@ function getRealName(name){
 
 function getEventSettingsVariables(){
     const googleTag = tag.filter((x)=> x.type==='googtag')
-    return googleTag;
+    const parameterArray = googleTag[0].parameter;
+    let eventSettings;
+    for(x of parameterArray){
+        if(x.key==='eventSettingsVariable'){
+            eventSettings = getRealName(x.value);
+        }
+    }
+    return eventSettings;
 }
 
 /**---------------------------------------------
