@@ -301,7 +301,7 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(tag.map((x) => {
+console.log(tag.filter((x) => {
     const arr = x.firingTriggerId;
-    return arr;
+    return arr.includes('51');
 }));
