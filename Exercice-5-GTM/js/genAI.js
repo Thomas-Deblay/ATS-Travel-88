@@ -1,3 +1,4 @@
-import container from './containerLVMH.json' assert { type: 'json' };
+const response = await fetch('./containerLVMH.json');
+const container = await response.json();
 
 console.log(container)
