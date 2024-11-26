@@ -286,9 +286,8 @@ function createTableau(){
 }
 
 function getAllRelatedTagsToTrigger(colonne){
-    //return tag.filter((x) => x.firingTriggerId.some((id) => id.includes(colonne.triggerEvent.triggerId)));
      
-    console.log(tag.forEach((x) => x.firingTriggerId));
+    return tag.filter((x) => (x.firingTriggerId !== undefined ? x.firingTriggerId.includes(colonne.triggerEvent.triggerId) : false ))
 }
 
 /**---------------------------------------------
@@ -301,4 +300,4 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(tag.filter((x) => (x.firingTriggerId !== undefined ? x.firingTriggerId.includes('51') : false )));
+console.log(tableauEventPush.map((colonne) => getAllRelatedTagsToTrigger(colonne)));
