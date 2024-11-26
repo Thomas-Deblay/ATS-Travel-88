@@ -277,6 +277,14 @@ function pushAnEventInTableau(trigger){
 
 }
 
+function createTableau(){
+    const allTrigger = getAllTriggerNameAndId;
+
+    allTrigger.forEach((trigger) => pushAnEventInTableau(trigger);)
+
+    return 1;
+}
+
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
@@ -286,5 +294,5 @@ function pushAnEventInTableau(trigger){
 const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
-pushAnEventInTableau();
+createTableau();
 console.log(tableauEventPush)
