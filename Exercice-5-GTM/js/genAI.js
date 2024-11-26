@@ -192,21 +192,30 @@ function getVariablesListFromNameEventSettings(name){
     return null;
 }
 
-function checkIfDLVVariable(variableName){
+function getVariableNameInVariable(variable){
+    const parameter = variable.parameter;
+    for(let x of parameter){
+        if(x.key==="name"){
+            return x.value;
+        }
+    }
+}
+
+function toReturnIfDLVVariable(variableName){
     for (let x of variable){
         if(x.name===variableName){
             if(x.type==='v'){
-                return true;
+                return getVariableNameInVariable(x);
             }
         }
     }
-    return false;
+    return null;
 }
 
 function returnListOfVaribaleNamesFromList(list){
     const listOfNames = list.map((x) => getRealName(x.map[1].value));
-
-    return listOfNames.filter((x) => checkIfDLVVariable(x));
+    listOfNames = listOfNames.map((x) => toReturnIfDLVVariable(x))
+    return listOfNames.filter((x) => x !== null);
 }
 
 function getEventSettingsVariables(){
