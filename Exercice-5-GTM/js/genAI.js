@@ -301,4 +301,4 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(getAllRelatedTagsToTrigger('test'))
+console.log(tag.map((x) => x.firingTriggerId))
