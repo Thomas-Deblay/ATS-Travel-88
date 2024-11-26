@@ -203,7 +203,7 @@ function checkIfDLVVariable(variableName){
 function returnListOfVaribaleNamesFromList(list){
     const listOfNames = list.map((x) => x.map[1].value);
 
-    return listOfNames.filter((x) => checkIfDLVVariable(x));
+    return listOfNames;
 }
 
 function getEventSettingsVariables(){
