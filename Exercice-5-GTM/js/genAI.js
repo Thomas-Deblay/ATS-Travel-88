@@ -247,12 +247,19 @@ function createDataLayerPush(event, variables){
     return push;
 }
 
+function getAllTrigger(){
+    const wantedTriggers = trigger.filter((x) => x.type === "CUSTOM_EVENT" && x.customEventFilter)
+
+    return wantedTriggers;
+}
+
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
  */
 
 
-const eventSettingsVariables = getEventSettingsVariables();
+const eventSettingsVariablesArray = getEventSettingsVariables();
 
-console.log(createDataLayerPush(false,eventSettingsVariables))
+console.log(createDataLayerPush(false,eventSettingsVariablesArray))
+console.log(getAllTrigger())
