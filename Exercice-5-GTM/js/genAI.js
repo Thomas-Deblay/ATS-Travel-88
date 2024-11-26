@@ -238,11 +238,11 @@ function getEventSettingsVariables(){
 function createDataLayerPush(event, variables){
     let push = 'dataLayer.push(\n{\n';
     if(event){
-        push += `event : $${event}\n`;
+        push += `event : $${event},\n`;
     }
 
     for(let variable of variables){
-        push += `${variable} : $${variable}\n`;
+        push += `${variable} : $${variable},\n`;
     }
 
     push += '}\n)';
@@ -286,7 +286,7 @@ function createTableau(){
 }
 
 function getAllRelatedTagsToTrigger(colonne){
-    return tag.filter((x) => x.firingTriggerId.includes(colonne.triggerEvent.triggerId))
+    return tag.filter((x) => x.firingTriggerId.some((id) => id.includes(colonne.triggerEvent.triggerId)))
 }
 
 /**---------------------------------------------
