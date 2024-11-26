@@ -234,7 +234,7 @@ function getEventSettingsVariables(){
 }
 
 function createDataLayerPush(event, variables){
-    const push = {};
+    let push = {};
     if(event){
         push = {...push, event : `$${event}`}
     }
