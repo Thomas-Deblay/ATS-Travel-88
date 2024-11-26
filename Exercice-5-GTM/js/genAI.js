@@ -201,7 +201,10 @@ function getEventSettingsVariables(){
         }
     }
 
-    return getVariablesListFromNameEventSettings(eventSettings);
+    let listOfVaribales = getVariablesListFromNameEventSettings(eventSettings);
+
+
+    return listOfVaribales.map((x) => x.map[1].value);
 }
 
 /**---------------------------------------------
