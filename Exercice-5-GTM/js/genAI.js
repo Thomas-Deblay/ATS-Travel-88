@@ -182,6 +182,15 @@ function getRealName(name){
     return newName.slice(0,-2);
 }
 
+function getVariablesListFromNameEventSettings(name){
+    for(let x of variable){
+        if(x.name===name){
+            return x.parameter[0].list;
+        }
+    }
+    return null;
+}
+
 function getEventSettingsVariables(){
     const googleTag = tag.filter((x)=> x.type==='googtag')
     const parameterArray = googleTag[0].parameter;
@@ -191,7 +200,8 @@ function getEventSettingsVariables(){
             eventSettings = getRealName(x.value);
         }
     }
-    return eventSettings;
+
+    return getEventSettingsVariables(eventSettings);
 }
 
 /**---------------------------------------------
