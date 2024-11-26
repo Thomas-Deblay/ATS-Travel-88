@@ -173,9 +173,9 @@ Peux-tu à présent partager toutes ces informations dans un fichier CSV ?
  * 
  */
 
-const tag = container.containerVersion.tag;
-const trigger = container.containerVersion.trigger;
-const variable = container.containerVersion.variable;
+var tag = container.containerVersion.tag;
+var trigger = container.containerVersion.trigger;
+var variable = container.containerVersion.variable;
 
 var tableauEventPush = [];
 
@@ -286,7 +286,8 @@ function createTableau(){
 }
 
 function getAllRelatedTagsToTrigger(colonne){
-    return tag.filter((x) => x.firingTriggerId.some((id) => id.includes(colonne.triggerEvent.triggerId)))
+    //return tag.filter((x) => x.firingTriggerId.some((id) => id.includes(colonne.triggerEvent.triggerId)));
+    return tag.forEach((x) => x.firingTriggerId);
 }
 
 /**---------------------------------------------
