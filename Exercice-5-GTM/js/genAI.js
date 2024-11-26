@@ -177,6 +177,8 @@ const tag = container.containerVersion.tag;
 const trigger = container.containerVersion.trigger;
 const variable = container.containerVersion.variable;
 
+var tableauEventPush = [];
+
 //Taking out the semicolones at the begennings and at the ends ==> {{test}} -> test
 function getRealName(name){
     let newName = name.slice(2);
@@ -253,6 +255,28 @@ function getAllTrigger(){
     return wantedTriggers;
 }
 
+function getAllTriggerNameAndId(){
+    const wantedTriggers = getAllTrigger();
+
+    return wantedTriggers.map((trigger) => ({name: `${trigger.customEventFilter[0].parameter[1].value}`, id: `${trigger.triggerId}`}) )
+}
+
+function pushAnEventInTableau(trigger){
+
+    let colonne = {
+        triggerEvent : {
+            name :'',
+            triggerId: '', 
+        },
+        pushEvent : {
+            push : '',
+        }
+    };
+
+    return null;
+
+}
+
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
@@ -262,4 +286,4 @@ function getAllTrigger(){
 const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
-console.log(getAllTrigger())
+console.log(getAllTriggerNameAndId())
