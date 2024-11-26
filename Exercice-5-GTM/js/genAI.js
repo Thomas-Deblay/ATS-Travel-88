@@ -177,6 +177,7 @@ const tag = container.containerVersion.tag;
 const trigger = container.containerVersion.trigger;
 const variable = container.containerVersion.variable;
 
+//Taking out the semicolones at the begennings and at the ends ==> {{test}} -> test
 function getRealName(name){
     let newName = name.slice(2);
     return newName.slice(0,-2);
