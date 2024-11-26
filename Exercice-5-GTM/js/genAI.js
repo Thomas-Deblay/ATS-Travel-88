@@ -300,4 +300,15 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(tableauEventPush.map((colonne) => getAllRelatedTagsToTrigger(colonne)));
+console.log(tableauEventPush.map((colonne) => {return (
+    {
+        triggerEvent : {
+            name : `${colonne.triggerEvent.name} `,
+            triggerId: `${colonne.triggerEvent.triggerId}` , 
+        },
+        pushEvent : {
+            push : getAllRelatedTagsToTrigger(colonne),
+        }
+    });}
+    
+));
