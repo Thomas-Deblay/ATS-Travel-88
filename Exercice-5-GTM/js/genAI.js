@@ -183,11 +183,12 @@ function getRealName(name){
 }
 
 function getEventSettingsVariables(){
-    return 1;
+    const googleTag = tag.filter((x)=> x.type==='googtag')
+    return googtag;
 }
 
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
  */
-console.log(getRealName('{{GA4 - pageView}}'))
+console.log(getEventSettingsVariables())
