@@ -265,8 +265,8 @@ function pushAnEventInTableau(trigger){
 
     let colonne = {
         triggerEvent : {
-            name : trigger.name,
-            triggerId: trigger.id, 
+            name : `${trigger.name} `,
+            triggerId: `${trigger.id}` , 
         },
         pushEvent : {
             push : '',
@@ -278,9 +278,9 @@ function pushAnEventInTableau(trigger){
 }
 
 function createTableau(){
-    const allTrigger = getAllTriggerNameAndId;
+    const allTrigger = getAllTriggerNameAndId();
 
-    allTrigger.forEach((trigger) => pushAnEventInTableau(trigger);)
+    allTrigger.forEach((trigger) => pushAnEventInTableau(trigger))
 
     return 1;
 }
