@@ -201,7 +201,7 @@ function getEventSettingsVariables(){
         }
     }
 
-    return getEventSettingsVariables(eventSettings);
+    return getVariablesListFromNameEventSettings(eventSettings);
 }
 
 /**---------------------------------------------
