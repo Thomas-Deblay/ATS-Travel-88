@@ -214,8 +214,8 @@ function toReturnIfDLVVariable(variableName){
 
 function returnListOfVaribaleNamesFromList(list){
     const listOfNames = list.map((x) => getRealName(x.map[1].value));
-    listOfNames = listOfNames.map((x) => toReturnIfDLVVariable(x))
-    return listOfNames.filter((x) => x !== null);
+    
+    return listOfNames.map((x) => toReturnIfDLVVariable(x));
 }
 
 function getEventSettingsVariables(){
