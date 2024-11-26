@@ -285,6 +285,10 @@ function createTableau(){
     return 1;
 }
 
+function getAllRelatedTagsToTrigger(colonne){
+    return tag.filter((x) => x.firingTriggerId.includes(colonne.triggerEvent.triggerId))
+}
+
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
@@ -295,4 +299,4 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(tableauEventPush)
+console.log(tableauEventPush.map((el) => getAllRelatedTagsToTrigger(el)))
