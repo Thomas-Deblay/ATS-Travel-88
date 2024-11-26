@@ -177,4 +177,17 @@ const tag = container.containerVersion.tag;
 const trigger = container.containerVersion.trigger;
 const variable = container.containerVersion.variable;
 
-console.log('Tag', tag )
+function getRealName(name){
+    let newName = name.slice(2);
+    return newName.slice(0,-2);
+}
+
+function getEventSettingsVariables(){
+    return 1;
+}
+
+/**---------------------------------------------
+ * Testing Part when i try console logs
+ -----------------------------------------------
+ */
+console.log(getRealName('{{GA4 - pageView}}'))
