@@ -240,10 +240,10 @@ function createDataLayerPush(event, variables){
     }
 
     for(let variable of variables){
-        push = {...push, variable:`$${variable}` }
+        push = {...push, [variable]:`$${variable}` }
     }
 
-    return push;
+    return JSON.stringify(push);
 }
 
 /**---------------------------------------------
