@@ -265,15 +265,15 @@ function pushAnEventInTableau(trigger){
 
     let colonne = {
         triggerEvent : {
-            name :'',
-            triggerId: '', 
+            name : trigger.name,
+            triggerId: trigger.id, 
         },
         pushEvent : {
             push : '',
         }
     };
 
-    return null;
+    return tableauEventPush.push(colonne);
 
 }
 
@@ -286,4 +286,5 @@ function pushAnEventInTableau(trigger){
 const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
-console.log(getAllTriggerNameAndId())
+pushAnEventInTableau();
+console.log(tableauEventPush)
