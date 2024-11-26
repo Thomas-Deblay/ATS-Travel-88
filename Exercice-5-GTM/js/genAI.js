@@ -233,8 +233,25 @@ function getEventSettingsVariables(){
     return returnListOfVaribaleNamesFromList(listOfVaribales);
 }
 
+function createDataLayerPush(event, variables){
+    const push = {};
+    if(event){
+        push = {...push, event : `$${event}`}
+    }
+
+    for(let variable of variables){
+        push = {...push, variable:`$${variable}` }
+    }
+
+    return push;
+}
+
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
  */
-console.log(getEventSettingsVariables())
+
+
+const eventSettingsVariables = getEventSettingsVariables();
+
+console.log(createDataLayerPush(false,eventSettingsVariables))
