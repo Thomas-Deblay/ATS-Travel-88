@@ -314,6 +314,6 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-createDataLayerPush();
+createDataLayerPushByEvent();
 
 console.log(tableauEventPush);
