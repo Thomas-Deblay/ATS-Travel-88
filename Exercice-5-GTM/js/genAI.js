@@ -290,6 +290,20 @@ function getAllRelatedTagsToTrigger(colonne){
     return tag.filter((x) => (x.firingTriggerId !== undefined ? x.firingTriggerId.includes(colonne.triggerEvent.triggerId) : false ))
 }
 
+function createDataLayerPushByEvent(){
+
+    tableauEventPush.forEach((colonne, index) => {
+        let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
+        tableauEventPush.splice(index, 1, {...colonne,
+        pushEvent : {
+            push : dataLayerPush,
+        }
+    } )}  
+    )
+
+    console.log(tableauEventPush);
+}
+
 /**---------------------------------------------
  * Testing Part when i try console logs
  -----------------------------------------------
@@ -300,17 +314,6 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
-console.log(tableauEventPush.map((colonne) => {return (
-    {
-        triggerEvent : {
-            name : `${colonne.triggerEvent.name} `,
-            triggerId: `${colonne.triggerEvent.triggerId}` , 
-        },
-        pushEvent : {
-            push : getAllRelatedTagsToTrigger(colonne),
-        }
-    });}
-    
-));
+createDataLayerPush();
 
 console.log(tableauEventPush);
