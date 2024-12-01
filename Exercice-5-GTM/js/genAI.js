@@ -296,11 +296,19 @@ function createDataLayerPushByEvent(){
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
         console.log(dataLayerPush);
         if(dataLayerPush.length > 0){
-        dataLayerPush = dataLayerPush[0];
-        dataLayerPush = dataLayerPush.parameter;
-        dataLayerPush = dataLayerPush.filter((x) => x.type==="LIST");
-        dataLayerPush = dataLayerPush[0].list;
-        dataLayerPush = returnListOfVaribaleNamesFromList(dataLayerPush)
+        const newpush = [];
+        dataLayerPush.forEach((tag) => {
+            const manipulatedTag = tag.parameter;
+            manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
+            manipulatedTag = manipulatedTag[0].list;
+            manipulatedTag = returnListOfVaribaleNamesFromList(manipulatedTag);
+            newpush.concat(manipulatedTag);
+        })
+
+        // dataLayerPush = dataLayerPush.parameter;
+        // dataLayerPush = dataLayerPush.filter((x) => x.type==="LIST");
+        // dataLayerPush = dataLayerPush[0].list;
+        // dataLayerPush = returnListOfVaribaleNamesFromList(dataLayerPush)
     }
         console.log(dataLayerPush);
 
