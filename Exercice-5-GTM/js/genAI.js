@@ -294,14 +294,15 @@ function createDataLayerPushByEvent(){
 
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
-        dataLayerPush = dataLayerPush[0];
-        if(dataLayerPush.parameter){
+        dataLayerPush = dataLayerPush[0] ? dataLayerPush[0] : undefined;
+        if(dataLayerPush.parameter!== undefined){
         dataLayerPush = dataLayerPush.parameter;
         dataLayerPush = dataLayerPush.filter((x) => x.type==="LIST");
         dataLayerPush = dataLayerPush[0].list;
+        dataLayerPush = returnListOfVaribaleNamesFromList(dataLayerPush)
     }
         console.log(dataLayerPush);
-        
+
         tableauEventPush.splice(index, 1, {...colonne,
         pushEvent : {
             push : dataLayerPush,
