@@ -295,8 +295,8 @@ function createDataLayerPushByEvent(){
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
         console.log(dataLayerPush);
-        dataLayerPush = dataLayerPush[0] ? dataLayerPush[0] : undefined;
-        if(dataLayerPush.parameter!== undefined){
+        if(dataLayerPush.length > 0){
+        dataLayerPush = dataLayerPush[0];
         dataLayerPush = dataLayerPush.parameter;
         dataLayerPush = dataLayerPush.filter((x) => x.type==="LIST");
         dataLayerPush = dataLayerPush[0].list;
