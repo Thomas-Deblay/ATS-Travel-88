@@ -312,3 +312,5 @@ console.log(tableauEventPush.map((colonne) => {return (
     });}
     
 ));
+
+console.log(tableauEventPush);
