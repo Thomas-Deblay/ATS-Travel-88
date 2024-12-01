@@ -300,11 +300,13 @@ function createDataLayerPushByEvent(){
         dataLayerPush.forEach((tag) => {
             let manipulatedTag = tag.parameter;
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
-            manipulatedTag = manipulatedTag[0].list;
-            manipulatedTag = returnListOfVaribaleNamesFromList(manipulatedTag);
+            if(manipulatedTag.length > 0){
+                manipulatedTag = manipulatedTag[0].list;
+                manipulatedTag = returnListOfVaribaleNamesFromList(manipulatedTag);
+             }
             newpush.concat(manipulatedTag);
         })
-
+        dataLayerPush = newpush;
         // dataLayerPush = dataLayerPush.parameter;
         // dataLayerPush = dataLayerPush.filter((x) => x.type==="LIST");
         // dataLayerPush = dataLayerPush[0].list;
