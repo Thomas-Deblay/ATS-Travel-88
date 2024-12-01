@@ -296,7 +296,7 @@ function createDataLayerPushByEvent(){
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
         console.log(dataLayerPush);
         if(dataLayerPush.length > 0){
-        const newpush = [];
+        let newpush = [];
         dataLayerPush.forEach((tag) => {
             let manipulatedTag = tag.parameter;
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
