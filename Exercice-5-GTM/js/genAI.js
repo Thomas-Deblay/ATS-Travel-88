@@ -298,7 +298,7 @@ function createDataLayerPushByEvent(){
         if(dataLayerPush.length > 0){
         const newpush = [];
         dataLayerPush.forEach((tag) => {
-            const manipulatedTag = tag.parameter;
+            let manipulatedTag = tag.parameter;
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             manipulatedTag = manipulatedTag[0].list;
             manipulatedTag = returnListOfVaribaleNamesFromList(manipulatedTag);
