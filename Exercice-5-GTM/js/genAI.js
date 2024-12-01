@@ -181,6 +181,7 @@ var tableauEventPush = [];
 
 //Taking out the semicolones at the begennings and at the ends ==> {{test}} -> test
 function getRealName(name){
+    console.log("We Are in GETREALNAME", name)
     let newName = name.slice(2);
     return newName.slice(0,-2);
 }
