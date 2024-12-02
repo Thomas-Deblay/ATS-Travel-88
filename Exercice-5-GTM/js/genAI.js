@@ -342,15 +342,17 @@ function getAllRelatedTagsToTrigger(colonne){
 }
 
 function getEcomPush(sendEcom, event){
-    console.log("Inside getEcomPush", sendEcom)
+    let ecomPush = "";
+    console.log("Inside getEcomPush", sendEcom + " " + event)
     if(sendEcom==="true"){
         ecommercePush.forEach((x) => {
+            console.log(x);
             if(x.event===event){
-                return x.push;
+                ecomPush = x.push;
             }
         } )
     }
-    return '';
+    return ecomPush;
 }
 
 function isSendEcom(parameter){
