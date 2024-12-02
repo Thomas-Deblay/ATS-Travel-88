@@ -290,10 +290,9 @@ function createDataLayerPush(event, variables, sendEcommerceData){
         push += `${variable} : $${variable},\n`;
     }
 
-    console.log(sendEcommerceData);
-    // if(sendEcommerceData.send==="true"){
-    //     push += sendEcommerceData.push;
-    // }
+    if(sendEcommerceData.send==="true"){
+        push += sendEcommerceData.push;
+    }
 
     push += '}\n)';
 
@@ -343,10 +342,9 @@ function getAllRelatedTagsToTrigger(colonne){
 
 function getEcomPush(sendEcom, event){
     let ecomPush = "";
-    console.log("Inside getEcomPush", sendEcom + " " + event)
+
     if(sendEcom==="true"){
         ecommercePush.forEach((x) => {
-            console.log(x);
             if(x.event===event){
                 ecomPush = x.push;
             }
@@ -388,7 +386,6 @@ function createDataLayerPushByEvent(){
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
         let sendEcommerceData = {send: "false"};
-        console.log(dataLayerPush)
   
         if(dataLayerPush.length > 0){
         let newpush = [];
@@ -406,7 +403,7 @@ function createDataLayerPushByEvent(){
     }
 
 
-    console.log(sendEcommerceData);
+
         tableauEventPush.splice(index, 1, {...colonne,
         pushEvent : {
             push : dataLayerPush,
