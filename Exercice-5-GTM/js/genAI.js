@@ -178,9 +178,8 @@ Peux-tu à présent partager toutes ces informations dans un fichier CSV ?
  * ==============================================================
  */
 
-const add_to_cartPush = "{\n" +
-"    \"ecommerce\": {\n" +
-"        \"currency\": \"USD\",\n" +
+const add_to_cartPush = "ecommerce: {\n" +
+"        \"currency: \"USD\",\n" +
 "        \"value\": 30.03,\n" +
 "        \"items\": [\n" +
 "            {\n" +
@@ -204,8 +203,7 @@ const add_to_cartPush = "{\n" +
 "                \"quantity\": 3\n" +
 "            }\n" +
 "        ]\n" +
-"    }\n" +
-"}";
+"    }\n";
 
 /**
  * End of GA4 EEC pushes
