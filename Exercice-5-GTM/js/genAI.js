@@ -362,7 +362,7 @@ function isSendEcom(parameter){
             variableToRender = x.value;
         }
     })
-    console.log("1 - ", variableToRender)
+  
     return variableToRender;
 }
 
@@ -371,20 +371,17 @@ function pickingEcommerceEvent(parameter){
     let eec = {};
     const sendEcom = isSendEcom(parameter);
     eec = {...eec, send: sendEcom};
-    console.log("before Looping", eec)
 
     parameter.forEach((x) => {
         
         if(x.key==="eventName"){
             if(ecommerceEvents.includes(x.value)){
-                console.log("variable for function " + eec.send + " and " + x.value);
                 const pushEEC = getEcomPush(eec.send ,x.value);
-                console.log("show me result: " + pushEEC);
                 eec = {...eec, eecPush: pushEEC};
             }
-            return eec;
         }
     } )
+    return eec;
 }
 
 function createDataLayerPushByEvent(){
@@ -409,7 +406,7 @@ function createDataLayerPushByEvent(){
     }
 
 
-
+    console.log(sendEcommerceData);
         tableauEventPush.splice(index, 1, {...colonne,
         pushEvent : {
             push : dataLayerPush,
