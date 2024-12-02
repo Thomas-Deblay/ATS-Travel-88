@@ -290,7 +290,8 @@ function createDataLayerPush(event, variables, sendEcommerceData){
         push += `${variable} : $${variable},\n`;
     }
 
-    console.log("inside function",sendEcommerceData);
+    console.log("inside function", sendEcommerceData);
+    console.log("send : " , sendEcommerceData.send);
     // if(sendEcommerceData.send === "true"){
     //     push += sendEcommerceData.push;
     // }
@@ -428,6 +429,5 @@ createTableau();
 createDataLayerPushByEvent();
 console.log(tableauEventPush);
 tableauEventPush.forEach((x) => {
-    console.log(x.pushEvent.sendEcommerceData);
-    // console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData))
+    console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData))
 });
