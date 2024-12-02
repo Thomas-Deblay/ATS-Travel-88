@@ -6,7 +6,6 @@
 const response = await fetch('./js/containerLVMH.json');
 const container = await response.json();
 
-console.log(container);
 
 /**=========================================================================================
  * 
@@ -240,7 +239,7 @@ function getEventSettingsVariables(){
 function createDataLayerPush(event, variables){
     let push = 'dataLayer.push(\n{\n';
     if(event){
-        push += `event : $${event},\n`;
+        push += `event : ${event},\n`;
     }
 
     for(let variable of variables){
@@ -296,7 +295,7 @@ function createDataLayerPushByEvent(){
 
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
-        console.log(dataLayerPush);
+  
         if(dataLayerPush.length > 0){
         let newpush = [];
         dataLayerPush.forEach((tag) => {
@@ -310,7 +309,6 @@ function createDataLayerPushByEvent(){
         })
         dataLayerPush = newpush;
     }
-        console.log(dataLayerPush);
 
         tableauEventPush.splice(index, 1, {...colonne,
         pushEvent : {
