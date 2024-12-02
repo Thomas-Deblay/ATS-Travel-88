@@ -293,6 +293,20 @@ function getAllRelatedTagsToTrigger(colonne){
     return tag.filter((x) => (x.firingTriggerId !== undefined ? x.firingTriggerId.includes(colonne.triggerEvent.triggerId) : false ))
 }
 
+function pickingEcommerceEvent(parameter){
+    parameter.forEach((x) => {
+        if(x.key==="eventName"){
+            if(ecommerceEvents.includes(x.value)){
+                console.log("this is a ecommerce event")
+                return {test: "test"};
+            }
+            else {
+                return {noGood : "noGood"};
+            }
+        }
+    } )
+}
+
 function createDataLayerPushByEvent(){
 
     tableauEventPush.forEach((colonne, index) => {
@@ -303,6 +317,7 @@ function createDataLayerPushByEvent(){
         let newpush = [];
         dataLayerPush.forEach((tag) => {
             let manipulatedTag = tag.parameter;
+            pickingEcommerceEvent(manipulatedTag);
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             if(manipulatedTag.length > 0){
                 manipulatedTag = manipulatedTag[0].list;
