@@ -555,7 +555,7 @@
                     {
                         "type": "BOOLEAN",
                         "key": "sendEcommerceData",
-                        "value": "false"
+                        "value": "true"
                     },
                     {
                         "type": "LIST",

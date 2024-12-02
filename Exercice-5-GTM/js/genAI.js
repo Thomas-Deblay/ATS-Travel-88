@@ -172,11 +172,53 @@ Peux-tu à présent partager toutes ces informations dans un fichier CSV ?
  * 
  */
 
+/**
+ * ============================================================
+ *          GA4 - ECOMMERCE PUSHES
+ * ==============================================================
+ */
+
+const add_to_cartPush = "{\n" +
+"    \"ecommerce\": {\n" +
+"        \"currency\": \"USD\",\n" +
+"        \"value\": 30.03,\n" +
+"        \"items\": [\n" +
+"            {\n" +
+"                \"itemid\": \"SKU12345\",\n" +
+"                \"itemname\": \"Stan and Friends Tee\",\n" +
+"                \"affiliation\": \"Google Merchandise Store\",\n" +
+"                \"coupon\": \"SUMMERFUN\",\n" +
+"                \"discount\": 2.22,\n" +
+"                \"index\": 0,\n" +
+"                \"itembrand\": \"Google\",\n" +
+"                \"itemcategory\": \"Apparel\",\n" +
+"                \"itemcategory2\": \"Adult\",\n" +
+"                \"itemcategory3\": \"Shirts\",\n" +
+"                \"itemcategory4\": \"Crew\",\n" +
+"                \"itemcategory5\": \"Short sleeve\",\n" +
+"                \"itemlistid\": \"relatedproducts\",\n" +
+"                \"itemlistname\": \"Related Products\",\n" +
+"                \"itemvariant\": \"green\",\n" +
+"                \"locationid\": \"ChIJIQBpAG2ahYAR6128GcTUEo\",\n" +
+"                \"price\": 10.01,\n" +
+"                \"quantity\": 3\n" +
+"            }\n" +
+"        ]\n" +
+"    }\n" +
+"}";
+
+/**
+ * End of GA4 EEC pushes
+ * ================================================================
+ */
+
 var tag = container.containerVersion.tag;
 var trigger = container.containerVersion.trigger;
 var variable = container.containerVersion.variable;
 
-const ecommerceEvents = [ 'view_item', 'select_item', 'add_to_cart', 'remove_from_cart', 'begin_checkout', 'add_payment_info', 'purchase', 'refund', 'view_cart', 'view_item_list', 'generate_lead', 'checkout_progress', 'set_checkout_option' ];
+const ecommerceEvents = [ 'view_item', 'select_item', 'add_to_cart', 'remove_from_cart', 'begin_checkout', 'add_payment_info', 'purchase', 'refund', 'view_cart', 'view_item_list', 'checkout_progress', 'set_checkout_option' ];
+
+const ecommercePush = [{event: "add_to_cart", push: add_to_cartPush}]
 
 var tableauEventPush = [];
 
@@ -238,7 +280,7 @@ function getEventSettingsVariables(){
     return returnListOfVaribaleNamesFromList(listOfVaribales);
 }
 
-function createDataLayerPush(event, variables){
+function createDataLayerPush(event, variables, sendEcommerceData){
     let push = 'dataLayer.push(\n{\n';
     if(event){
         push += `event : ${event},\n`;
@@ -248,7 +290,12 @@ function createDataLayerPush(event, variables){
         push += `${variable} : $${variable},\n`;
     }
 
+    if(sendEcommerceData.sendEcommerceData==="true"){
+        push += sendEcommerceData.push;
+    }
+
     push += '}\n)';
+
     return push;
 }
 
@@ -293,22 +340,38 @@ function getAllRelatedTagsToTrigger(colonne){
     return tag.filter((x) => (x.firingTriggerId !== undefined ? x.firingTriggerId.includes(colonne.triggerEvent.triggerId) : false ))
 }
 
+function getEcomPush(sendEcommerceData, event){
+    if(sendEcommerceData==="true"){
+        ecommercePush.forEach((x) => {
+            if(x.event===event){
+                return x.push;
+            }
+        } )
+    }
+    return {};
+}
+
 function pickingEcommerceEvent(parameter){
+    let eec = {};
     parameter.forEach((x) => {
+        if(x.key==="sendEcommerceData"){
+            eec = {...eec, sendEcommerceData : x.value}
+        }
         if(x.key==="eventName"){
             if(ecommerceEvents.includes(x.value)){
-                console.log("this is a ecommerce event")
-                return {test: "test"};
+                const pushEEC = getEcomPush(eec.sendEcommerceData ,x.value);
+                eec = {...eec, eecPush: pushEEC}
+                return eec;
             }
             else {
-                return {noGood : "noGood"};
+                return eec;
             }
         }
     } )
 }
 
 function createDataLayerPushByEvent(){
-
+    let sendEcommerceData = {send: "false"};
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
         console.log(dataLayerPush)
@@ -328,9 +391,12 @@ function createDataLayerPushByEvent(){
         dataLayerPush = newpush;
     }
 
+
+
         tableauEventPush.splice(index, 1, {...colonne,
         pushEvent : {
             push : dataLayerPush,
+            sendEcommerceData : sendEcommerceData,
         }
     } )}  
     )
@@ -348,4 +414,4 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
 createDataLayerPushByEvent();
-tableauEventPush.forEach((x) => console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push)));
+tableauEventPush.forEach((x) => console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData)));
