@@ -290,9 +290,10 @@ function createDataLayerPush(event, variables, sendEcommerceData){
         push += `${variable} : $${variable},\n`;
     }
 
-    if(sendEcommerceData.sendEcommerceData==="true"){
-        push += sendEcommerceData.push;
-    }
+    console.log(sendEcommerceData);
+    // if(sendEcommerceData.send==="true"){
+    //     push += sendEcommerceData.push;
+    // }
 
     push += '}\n)';
 
@@ -355,17 +356,14 @@ function pickingEcommerceEvent(parameter){
     let eec = {};
     parameter.forEach((x) => {
         if(x.key==="sendEcommerceData"){
-            eec = {...eec, sendEcommerceData : x.value}
+            eec = {...eec, send : x.value}
         }
         if(x.key==="eventName"){
             if(ecommerceEvents.includes(x.value)){
-                const pushEEC = getEcomPush(eec.sendEcommerceData ,x.value);
-                eec = {...eec, eecPush: pushEEC}
-                return eec;
+                const pushEEC = getEcomPush(eec.send ,x.value);
+                eec = {...eec, eecPush: pushEEC};
             }
-            else {
-                return eec;
-            }
+            return eec;
         }
     } )
 }
