@@ -290,6 +290,7 @@ function createDataLayerPush(event, variables, sendEcommerceData){
         push += `${variable} : $${variable},\n`;
     }
 
+    console.log(sendEcommerceData);
     if(sendEcommerceData.send==="true"){
         push += sendEcommerceData.push;
     }
