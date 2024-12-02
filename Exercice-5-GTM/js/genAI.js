@@ -341,8 +341,8 @@ function getAllRelatedTagsToTrigger(colonne){
     return tag.filter((x) => (x.firingTriggerId !== undefined ? x.firingTriggerId.includes(colonne.triggerEvent.triggerId) : false ))
 }
 
-function getEcomPush(sendEcommerceData, event){
-    if(sendEcommerceData==="true"){
+function getEcomPush(sendEcom, event){
+    if(sendEcom==="true"){
         ecommercePush.forEach((x) => {
             if(x.event===event){
                 return x.push;
@@ -355,10 +355,11 @@ function getEcomPush(sendEcommerceData, event){
 function isSendEcom(parameter){
     parameter.forEach((x) => {
         if(x.key==="sendEcommerceData"){
+            console.log("1",x.value)
             return x.value;
         }
     })
-
+    console.log("2",x.value);
     return "false";
 }
 
