@@ -376,7 +376,7 @@ function pickingEcommerceEvent(parameter){
         if(x.key==="eventName"){
             if(ecommerceEvents.includes(x.value)){
                 const pushEEC = getEcomPush(eec.send ,x.value);
-                eec = {...eec, eecPush: pushEEC};
+                eec = {...eec, push: pushEEC};
             }
         }
     } )
