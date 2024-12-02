@@ -176,6 +176,8 @@ var tag = container.containerVersion.tag;
 var trigger = container.containerVersion.trigger;
 var variable = container.containerVersion.variable;
 
+const ecommerceEvents = [ 'view_item', 'select_item', 'add_to_cart', 'remove_from_cart', 'begin_checkout', 'add_payment_info', 'purchase', 'refund', 'view_cart', 'view_item_list', 'generate_lead', 'checkout_progress', 'set_checkout_option' ];
+
 var tableauEventPush = [];
 
 //Taking out the semicolones at the begennings and at the ends ==> {{test}} -> test
@@ -295,6 +297,7 @@ function createDataLayerPushByEvent(){
 
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
+        console.log(dataLayerPush)
   
         if(dataLayerPush.length > 0){
         let newpush = [];
