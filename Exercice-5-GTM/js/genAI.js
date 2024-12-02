@@ -355,12 +355,16 @@ function getEcomPush(sendEcommerceData, event){
 function pickingEcommerceEvent(parameter){
     let eec = {};
     parameter.forEach((x) => {
+        console.log("this is x :" + x);
         if(x.key==="sendEcommerceData"){
+            console.log("SendEcomm or not :"+ x.key + " and " + x.value);
             eec = {...eec, send : x.value}
         }
         if(x.key==="eventName"){
+            console.log("do i have a result for:" + ecommerceEvents.includes(x.value) + " varibales:" +ecommerceEvents +" and "+ x.value)
             if(ecommerceEvents.includes(x.value)){
                 const pushEEC = getEcomPush(eec.send ,x.value);
+                console.log("show me result: " + pushEEC);
                 eec = {...eec, eecPush: pushEEC};
             }
             return eec;
