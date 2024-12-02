@@ -380,7 +380,7 @@ function createDataLayerPushByEvent(){
         let newpush = [];
         dataLayerPush.forEach((tag) => {
             let manipulatedTag = tag.parameter;
-            pickingEcommerceEvent(manipulatedTag);
+            sendEcommerceData = pickingEcommerceEvent(manipulatedTag);
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             if(manipulatedTag.length > 0){
                 manipulatedTag = manipulatedTag[0].list;
