@@ -359,7 +359,7 @@ function isSendEcom(parameter){
             return x.value;
         }
     })
-    console.log("2",x.value);
+  
     return "false";
 }
 
