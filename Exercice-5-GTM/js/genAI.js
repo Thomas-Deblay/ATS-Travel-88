@@ -342,6 +342,7 @@ function getAllRelatedTagsToTrigger(colonne){
 }
 
 function getEcomPush(sendEcom, event){
+    console.log("Inside getEcomPush", sendEcom)
     if(sendEcom==="true"){
         ecommercePush.forEach((x) => {
             if(x.event===event){
@@ -368,12 +369,13 @@ function pickingEcommerceEvent(parameter){
     let eec = {};
     const sendEcom = isSendEcom(parameter);
     eec = {...eec, send: sendEcom};
+    console.log("before Looping", eec)
 
     parameter.forEach((x) => {
         
         if(x.key==="eventName"){
             if(ecommerceEvents.includes(x.value)){
-                console.log("variable for function" + eec.send + " and " + x.value);
+                console.log("variable for function " + eec.send + " and " + x.value);
                 const pushEEC = getEcomPush(eec.send ,x.value);
                 console.log("show me result: " + pushEEC);
                 eec = {...eec, eecPush: pushEEC};
