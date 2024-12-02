@@ -371,9 +371,9 @@ function pickingEcommerceEvent(parameter){
 }
 
 function createDataLayerPushByEvent(){
-    let sendEcommerceData = {send: "false"};
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
+        let sendEcommerceData = {send: "false"};
         console.log(dataLayerPush)
   
         if(dataLayerPush.length > 0){
@@ -414,4 +414,5 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
 createDataLayerPushByEvent();
+console.log(tableauEventPush)
 tableauEventPush.forEach((x) => console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData)));
