@@ -309,10 +309,6 @@ function createDataLayerPushByEvent(){
             newpush = newpush.concat(manipulatedTag);
         })
         dataLayerPush = newpush;
-        // dataLayerPush = dataLayerPush.parameter;
-        // dataLayerPush = dataLayerPush.filter((x) => x.type==="LIST");
-        // dataLayerPush = dataLayerPush[0].list;
-        // dataLayerPush = returnListOfVaribaleNamesFromList(dataLayerPush)
     }
         console.log(dataLayerPush);
 
@@ -323,7 +319,6 @@ function createDataLayerPushByEvent(){
     } )}  
     )
 
-    console.log(tableauEventPush);
 }
 
 /**---------------------------------------------
@@ -337,5 +332,4 @@ const eventSettingsVariablesArray = getEventSettingsVariables();
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
 createDataLayerPushByEvent();
-
-console.log(tableauEventPush);
+tableauEventPush.forEach((x) => console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push)));
