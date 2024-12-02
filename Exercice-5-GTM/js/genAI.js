@@ -354,14 +354,14 @@ function getEcomPush(sendEcom, event){
 }
 
 function isSendEcom(parameter){
+    let variableToRender = "false";
     parameter.forEach((x) => {
         if(x.key==="sendEcommerceData"){
-            console.log("1",x.value)
-            return x.value;
+            variableToRender = x.value;
         }
     })
-  
-    return "false";
+    console.log("1 - ", variableToRender)
+    return variableToRender;
 }
 
 
