@@ -303,6 +303,7 @@ function createDataLayerPushByEvent(){
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             if(manipulatedTag.length > 0){
                 manipulatedTag = manipulatedTag[0].list;
+                console.log(manipulatedTag);
                 manipulatedTag = returnListOfVaribaleNamesFromList(manipulatedTag);
              }
             newpush = newpush.concat(manipulatedTag);
