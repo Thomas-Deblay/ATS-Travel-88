@@ -181,9 +181,10 @@ var tableauEventPush = [];
 
 //Taking out the semicolones at the begennings and at the ends ==> {{test}} -> test
 function getRealName(name){
-    console.log("We Are in GETREALNAME", name)
+    if(name){
     let newName = name.slice(2);
     return newName.slice(0,-2);
+    }
 }
 
 function getVariablesListFromNameEventSettings(name){
@@ -302,9 +303,7 @@ function createDataLayerPushByEvent(){
             let manipulatedTag = tag.parameter;
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             if(manipulatedTag.length > 0){
-                console.log("1",manipulatedTag)
                 manipulatedTag = manipulatedTag[0].list;
-                console.log("2",manipulatedTag);
                 manipulatedTag = returnListOfVaribaleNamesFromList(manipulatedTag);
              }
             newpush = newpush.concat(manipulatedTag);
