@@ -427,4 +427,7 @@ console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
 createDataLayerPushByEvent();
 console.log(tableauEventPush)
-tableauEventPush.forEach((x) => console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData)));
+tableauEventPush.forEach((x) => {
+    console.log(x)
+    // console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData))
+});
