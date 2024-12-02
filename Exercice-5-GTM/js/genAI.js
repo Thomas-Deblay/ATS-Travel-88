@@ -349,22 +349,30 @@ function getEcomPush(sendEcommerceData, event){
             }
         } )
     }
-    return {};
+    return '';
 }
+
+function isSendEcom(parameter){
+    parameter.forEach((x) => {
+        if(x.key==="sendEcommerceData"){
+            return x.value;
+        }
+    })
+
+    return "false";
+}
+
 
 function pickingEcommerceEvent(parameter){
     let eec = {};
+    const sendEcom = isSendEcom(parameter);
+    eec = {...eec, send: sendEcom};
+
     parameter.forEach((x) => {
-        if(x.key==="sendEcommerceData"){
-            eec = {...eec, send : x.value};
-        }
-        else{
-            eec = {...eec, send : "false"};
-        }
         
         if(x.key==="eventName"){
             if(ecommerceEvents.includes(x.value)){
-                console.log("variable for function" + eec.send + "and" + x.value);
+                console.log("variable for function" + eec.send + " and " + x.value);
                 const pushEEC = getEcomPush(eec.send ,x.value);
                 console.log("show me result: " + pushEEC);
                 eec = {...eec, eecPush: pushEEC};
