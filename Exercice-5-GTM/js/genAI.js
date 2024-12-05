@@ -383,11 +383,13 @@ function pickingEcommerceEvent(parameter){
 }
 
 function returnGA4EventNames(parameter){
+    let event;
     parameter.forEach((x) => {
         if(x.key==="eventName"){
-            return x.value;
+            event = x.value;
         }
     } )
+    return event;
 }
 
 function createDataLayerPushByEvent(){
@@ -430,8 +432,24 @@ function createDataLayerPushByEvent(){
  -----------------------------------------------
  */
 
+/**
+ * Creating function to console log push
+ * 
+ */
 
+function specTable(GA4Event, trigger, dataLayerPush){
+    this.GA4Event = GA4Event;
+    this.trigger = trigger;
+    this.dataLayerPush = dataLayerPush;
+}
+
+
+
+/*
+end -
+*/
 const eventSettingsVariablesArray = getEventSettingsVariables();
+
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
