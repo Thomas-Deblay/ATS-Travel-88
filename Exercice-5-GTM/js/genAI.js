@@ -278,7 +278,7 @@ function getEventSettingsVariables(){
     return returnListOfVaribaleNamesFromList(listOfVaribales);
 }
 
-function createDataLayerPush(event, variables, sendEcommerceData, send){
+function createDataLayerPush(event, variables, sendEcommerceData, send, GA4Event){
     let push = 'dataLayer.push(\n{\n';
     if(event){
         push += `event : ${event},\n`;
@@ -292,6 +292,13 @@ function createDataLayerPush(event, variables, sendEcommerceData, send){
 
     if(send === "true"){
         push += sendEcommerceData.push;
+    }
+
+    if(GA4Event.includes("page_view")){
+        for(let variable of eventSettingsVariablesArray){
+            push += `${variable} : $${variable},\n`;
+        }
+       
     }
 
     push += '}\n)';
@@ -451,7 +458,7 @@ function createTable(){
     tableauEventPush.forEach((x) => {
         const event = x.GA4Events.length > 0 ? x.GA4Events.toString() : "none";
         const trigger = x.triggerEvent.name;
-        const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send );
+        const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send, x.GA4Events );
     
         const colonne = new specTable(event, trigger, push);
     
@@ -469,7 +476,7 @@ function createTable(){
 /*
 end -
 */
-const eventSettingsVariablesArray = getEventSettingsVariables();
+var eventSettingsVariablesArray = getEventSettingsVariables();
 
 
 console.log(createDataLayerPush(false,eventSettingsVariablesArray))
@@ -482,9 +489,12 @@ const finalTable = createTable();
 console.table(finalTable);
 
 finalTable.forEach((x) => {
+    console.log("=====================================\n")
     console.log('GA4 Event : ', x.GA4event);
     console.log('trigger : ', x.trigger);
+    console.log("\n\n");
     console.log('DataLayer Push : ', x.dataLayerPush);
+    console.log("\n=====================================\n")
 })
 
 
