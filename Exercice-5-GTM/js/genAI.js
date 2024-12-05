@@ -403,7 +403,9 @@ function createDataLayerPushByEvent(){
         dataLayerPush.forEach((tag) => {
             let manipulatedTag = tag.parameter;
             sendEcommerceData = pickingEcommerceEvent(manipulatedTag);
-            ga4Events.push(returnGA4EventNames(manipulatedTag));
+            if(returnGA4EventNames(manipulatedTag) !== undefined){
+                ga4Events.push(returnGA4EventNames(manipulatedTag));
+             }
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             if(manipulatedTag.length > 0){
                 manipulatedTag = manipulatedTag[0].list;
