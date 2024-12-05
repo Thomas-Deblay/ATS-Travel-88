@@ -439,8 +439,8 @@ function createDataLayerPushByEvent(){
  * 
  */
 
-function specTable(event, trigger, dataLayerPush){
-    this.event = event;
+function specTable(GA4event, trigger, dataLayerPush){
+    this.GA4event = GA4event;
     this.trigger = trigger;
     this.dataLayerPush = dataLayerPush;
 }
@@ -477,6 +477,14 @@ createTableau();
 createDataLayerPushByEvent();
 console.log(tableauEventPush);
 
-const finalArray = createTable();
+const finalTable = createTable();
 
-console.table(finalArray.reduce((acc, {myId, ...x}) => { acc[myId] = x; return acc}, {}));
+console.table(finalTable);
+
+finalTable.forEach((x) => {
+    console.log('GA4 Event : ', x.GA4event);
+    console.log('trigger : ', x.trigger);
+    console.log('DataLayer Push : ', x.dataLayerPush);
+})
+
+
