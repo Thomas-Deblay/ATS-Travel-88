@@ -443,6 +443,25 @@ function specTable(GA4Event, trigger, dataLayerPush){
     this.dataLayerPush = dataLayerPush;
 }
 
+function createTable(){
+    const Table = [];
+
+    tableauEventPush.forEach((x) => {
+        const event = x.GA4Events;
+        const trigger = x.triggerEvent.name;
+        const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send );
+    
+        const colonne = specTable(...event, trigger, push);
+    
+        Table.push(colonne);
+    });
+
+    return Table;
+
+}
+
+
+
 
 
 /*
@@ -455,6 +474,6 @@ console.log(createDataLayerPush(false,eventSettingsVariablesArray))
 createTableau();
 createDataLayerPushByEvent();
 console.log(tableauEventPush);
-tableauEventPush.forEach((x) => {
-    console.log(createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send ))
-});
+
+
+console.table(createTable());
