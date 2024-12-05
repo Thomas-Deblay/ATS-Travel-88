@@ -477,5 +477,6 @@ createTableau();
 createDataLayerPushByEvent();
 console.log(tableauEventPush);
 
+const finalArray = createTable();
 
-console.table(createTable());
+console.table(finalArray.reduce((acc, {myId, ...x}) => { acc[myId] = x; return acc}, {}));
