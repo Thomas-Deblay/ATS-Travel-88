@@ -449,11 +449,11 @@ function createTable(){
     const Table = [];
 
     tableauEventPush.forEach((x) => {
-        const event = x.GA4Events.length > 0 ? x.GA4Events : ["none"];
+        const event = x.GA4Events.length > 0 ? x.GA4Events.toString() : "none";
         const trigger = x.triggerEvent.name;
         const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send );
     
-        const colonne = specTable(...event, trigger, push);
+        const colonne = specTable(event, trigger, push);
     
         Table.push(colonne);
     });
