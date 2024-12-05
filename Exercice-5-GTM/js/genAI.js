@@ -439,8 +439,8 @@ function createDataLayerPushByEvent(){
  * 
  */
 
-function specTable(GA4Event, trigger, dataLayerPush){
-    this.GA4Event = GA4Event;
+function specTable(event, trigger, dataLayerPush){
+    this.event = event;
     this.trigger = trigger;
     this.dataLayerPush = dataLayerPush;
 }
@@ -449,7 +449,7 @@ function createTable(){
     const Table = [];
 
     tableauEventPush.forEach((x) => {
-        const event = x.GA4Events;
+        const event = x.GA4Events ? x.GA4Events : ["none"];
         const trigger = x.triggerEvent.name;
         const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send );
     
