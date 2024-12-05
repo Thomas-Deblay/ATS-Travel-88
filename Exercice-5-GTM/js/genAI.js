@@ -458,7 +458,7 @@ function createTable(){
     tableauEventPush.forEach((x) => {
         const event = x.GA4Events.length > 0 ? x.GA4Events.toString() : "none";
         const trigger = x.triggerEvent.name;
-        const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send, x.GA4Events );
+        const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send, event );
     
         const colonne = new specTable(event, trigger, push);
     
