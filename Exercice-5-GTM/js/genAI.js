@@ -453,7 +453,7 @@ function createTable(){
         const trigger = x.triggerEvent.name;
         const push = createDataLayerPush(x.triggerEvent.name, x.pushEvent.push, x.pushEvent.sendEcommerceData ,x.pushEvent.sendEcommerceData.send );
     
-        const colonne = specTable(event, trigger, push);
+        const colonne = new specTable(event, trigger, push);
     
         Table.push(colonne);
     });
