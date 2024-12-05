@@ -382,16 +382,26 @@ function pickingEcommerceEvent(parameter){
     return eec;
 }
 
+function returnGA4EventNames(parameter){
+    parameter.forEach((x) => {
+        if(x.key==="eventName"){
+            return x.value;
+        }
+    } )
+}
+
 function createDataLayerPushByEvent(){
     tableauEventPush.forEach((colonne, index) => {
         let dataLayerPush = getAllRelatedTagsToTrigger(colonne);
         let sendEcommerceData = {send: "false"};
+        let ga4Events = [];
   
         if(dataLayerPush.length > 0){
         let newpush = [];
         dataLayerPush.forEach((tag) => {
             let manipulatedTag = tag.parameter;
             sendEcommerceData = pickingEcommerceEvent(manipulatedTag);
+            ga4Events.push(returnGA4EventNames(manipulatedTag));
             manipulatedTag = manipulatedTag.filter((x) => x.type==="LIST");
             if(manipulatedTag.length > 0){
                 manipulatedTag = manipulatedTag[0].list;
@@ -408,7 +418,8 @@ function createDataLayerPushByEvent(){
         pushEvent : {
             push : dataLayerPush,
             sendEcommerceData : sendEcommerceData,
-        }
+        },
+        GA4Events : ga4Events
     } )}  
     )
 
